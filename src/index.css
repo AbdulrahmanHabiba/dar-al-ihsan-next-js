@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Islamic-inspired color palette */
+    --background: 48 20% 98%;
+    --foreground: 160 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 30% 15%;
+
+    /* Emerald green - primary Islamic color */
+    --primary: 160 60% 35%;
+    --primary-foreground: 48 95% 98%;
+    --primary-glow: 160 50% 45%;
+
+    /* Golden accent */
+    --secondary: 45 85% 55%;
+    --secondary-foreground: 160 30% 15%;
+
+    --muted: 48 20% 92%;
+    --muted-foreground: 160 15% 45%;
+
+    --accent: 45 85% 55%;
+    --accent-foreground: 160 30% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 48 95% 98%;
+
+    --border: 160 20% 88%;
+    --input: 160 20% 88%;
+    --ring: 160 60% 35%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(160 60% 35%), hsl(160 50% 45%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 85% 55%), hsl(45 75% 65%));
+    --gradient-hero: linear-gradient(180deg, hsl(160 60% 35% / 0.05), hsl(160 60% 35% / 0.02));
+    
+    /* Shadows */
+    --shadow-elegant: 0 4px 20px -4px hsl(160 60% 35% / 0.15);
+    --shadow-glow: 0 0 40px hsl(160 50% 45% / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 160 30% 8%;
+    --foreground: 48 95% 98%;
+
+    --card: 160 25% 12%;
+    --card-foreground: 48 95% 98%;
+
+    --popover: 160 25% 12%;
+    --popover-foreground: 48 95% 98%;
+
+    --primary: 160 50% 45%;
+    --primary-foreground: 160 30% 8%;
+    --primary-glow: 160 60% 55%;
+
+    --secondary: 45 75% 50%;
+    --secondary-foreground: 160 30% 8%;
+
+    --muted: 160 25% 15%;
+    --muted-foreground: 160 10% 65%;
+
+    --accent: 45 75% 50%;
+    --accent-foreground: 160 30% 8%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 48 95% 98%;
+
+    --border: 160 25% 20%;
+    --input: 160 25% 20%;
+    --ring: 160 50% 45%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(160 50% 45%), hsl(160 60% 55%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 75% 50%), hsl(45 85% 60%));
+    --gradient-hero: linear-gradient(180deg, hsl(160 50% 45% / 0.1), hsl(160 50% 45% / 0.05));
+    
+    --shadow-elegant: 0 4px 20px -4px hsl(160 50% 45% / 0.25);
+    --shadow-glow: 0 0 40px hsl(160 60% 55% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    direction: rtl;
+    font-family: 'Cairo', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Amiri', serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-gold {
+    background-image: var(--gradient-gold);
+  }
+
+  .bg-gradient-hero {
+    background-image: var(--gradient-hero);
+  }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
