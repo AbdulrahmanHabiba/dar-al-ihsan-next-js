@@ -6,10 +6,14 @@ const nextConfig = {
           protocol: 'https',
           hostname: 'images.unsplash.com',
         },
-        {
-          protocol: 'https',
-          hostname: 'plus.unsplash.com',
-        },
+          {
+            protocol: 'https',
+            hostname: 'plus.unsplash.com',
+          },
+          {
+            protocol: 'https',
+            hostname: 'cdn.islam-online.net',
+          },
       ],
     },
     // Note: i18n is not supported in App Router

@@ -174,10 +174,11 @@ const Quran = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
               {[
-                { name: "الشيخ ماهر المعيقلي", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop" },
-                { name: "الشيخ عبد الباسط عبد الصمد", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop" },
-                { name: "الشيخ محمد صديق المنشاوي", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&auto=format&fit=crop" },
-                { name: "الشيخ مشاري راشد العفاسي", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&auto=format&fit=crop" },
+                { name: "الشيخ محمود خليل الحصري", image: "https://cdn.islam-online.net/data/full/mahmoud-al-hussary/profile.jpg" },
+                { name: "الشيخ محمد صديق المنشاوي", image: "https://cdn.islam-online.net/data/full/almenshawy/profile.jpg" },
+                { name: "الشيخ عبد الباسط عبد الصمد", image: "https://cdn.islam-online.net/data/full/abdel-baset-abdel-samad/profile.jpg" },
+                { name: "الشيخ ماهر المعيقلي", image: "https://cdn.islam-online.net/data/full/maher-al-muaiqly/profile.jpg" },
+                { name: "الشيخ سعد الغامدي", image: "https://cdn.islam-online.net/data/full/saad-al-ghamdy/profile.jpg" },
               ].map((reciter, index) => (
                 <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer">
                   <div className="aspect-square overflow-hidden bg-muted">
