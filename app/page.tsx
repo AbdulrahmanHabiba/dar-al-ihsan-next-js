@@ -58,6 +58,10 @@ const Index = () => {
                 <br />
                 <span className="text-gradient-primary">لتحفيظ وتجويد القرآن الكريم</span>
               </h1>
+              <div className="flex flex-col items-center gap-2 mb-4">
+                <span className="text-md text-muted-foreground font-semibold">تحت رعاية وإشراف الأزهر الشريف &ndash; ترخيص رقم 828 لسنة 2011</span>
+                <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{height:32, width:"auto"}} />
+              </div>
               
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
                 رحلة إيمانية في رحاب القرآن الكريم، نقدم برامج تعليمية متميزة في الحفظ والتجويد بإشراف نخبة من المعلمين المتخصصين

@@ -16,7 +16,13 @@ const Location = () => {
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-primary mb-6 shadow-glow">
                 <MapPin className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-5xl font-bold mb-6">موقعنا</h1>
+              <h1 className="text-5xl font-bold mb-6">
+                دار الإحسان لتحفيظ القرآن وعلومه – مركز إدكو، محافظة البحيرة
+              </h1>
+              <div className="flex flex-col items-center gap-2 mb-4">
+                <span className="text-md text-muted-foreground font-semibold">تحت رعاية وإشراف الأزهر الشريف &ndash; ترخيص رقم 828 لسنة 2011</span>
+                <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{height:32, width:"auto"}} />
+              </div>
               <p className="text-xl text-muted-foreground">
                 نحن في انتظارك، تفضل بزيارتنا في أي وقت
               </p>
@@ -34,7 +40,9 @@ const Location = () => {
                     <MapPin className="h-6 w-6 text-primary-foreground" />
                   </div>
                   <h3 className="font-bold mb-2">العنوان</h3>
-                  <p className="text-sm text-muted-foreground">القاهرة، مصر</p>
+                  <p className="text-sm text-muted-foreground">
+                    مركز إدكو – محافظة البحيرة – شارع البحر بجوار مسجد الشهداء
+                  </p>
                 </CardContent>
               </Card>
 
@@ -79,8 +87,7 @@ const Location = () => {
                 <div className="aspect-video bg-muted relative">
                   {/* Google Maps Embed - يمكن استبدال src بالرابط الحقيقي */}
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.33652974631!2d31.223096!3d30.044420!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Egypt!5e0!3m2!1sen!2s!4v1234567890"
-                    width="100%"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d213.05044661311987!2d30.2933174!3d31.309075!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f67d00084871b5%3A0x35aa9aa6d1a377f7!2z2K_Yp9ixINin2YTYpdit2LPYp9mGICjYp9mE2YXZgtixKQ!5e0!3m2!1sar!2seg!4v1764229060989!5m2!1sar!2seg"                    width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     allowFullScreen

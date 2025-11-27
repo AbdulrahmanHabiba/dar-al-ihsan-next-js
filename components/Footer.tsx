@@ -1,5 +1,6 @@
 import { BookOpen, Mail, MapPin, Phone } from "lucide-react";
 import { NavLink } from "./NavLink";
+import { SocialCard } from "./ui/SocialCard";
 
 const Footer = () => {
   return (
@@ -13,12 +14,20 @@ const Footer = () => {
                 <BookOpen className="h-5 w-5 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">دار الإحسان</h3>
+                <h3 className="font-bold text-lg">
+                  دار الإحسان لتحفيظ القرآن وعلومه
+                </h3>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground">
-              لتحفيظ وتجويد القرآن الكريم تحت إشراف الشيخ أحمد مرعي
-            </p>
+            <div className="flex flex-row items-start gap-2 mt-2" style={{alignItems: 'flex-start'}}>
+              <div className="flex flex-col items-start text-right ">
+                <span className="text-sm text-muted-foreground">تحت رعاية وإشراف الأزهر الشريف</span>
+                <span className="text-sm text-muted-foreground">ترخيص رقم 828 لسنة 2011</span>
+              </div>
+              <span className="inline-flex justify-center items-start ms-2" style={{height: '4em'}}>
+                <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{height:"2.9em", maxHeight:"3.8em", width: "auto", objectFit:"contain"}} />
+              </span>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -87,9 +96,41 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>القاهرة، مصر</span>
+                <span>مركز إدكو – محافظة البحيرة – شارع البحر – بجوار مسجد الشهداء</span>
               </li>
             </ul>
+          </div>
+
+          {/* Social/Official Pages */}
+          <div>
+            <h4 className="font-semibold mb-4">تابعنا</h4>
+            <div className="flex gap-3 justify-center">
+              {/* صفحة الفيسبوك */}
+              <SocialCard
+                name="صفحة الفيسبوك"
+                url="https://www.facebook.com/profile.php?id=100013462008509"
+                // استخدم Lucide facebook icon بدلاً من imgSrc
+                imgSrc={undefined}
+                subtitle="فيسبوك رسمي"
+                iconType="facebook"
+              />
+              {/* جروب الفيسبوك */}
+              <SocialCard
+                name="جروب الفيسبوك"
+                url="https://www.facebook.com/groups/1550459465114127"
+                imgSrc={undefined}
+                subtitle="مجموعة نقاشات"
+                iconType="facebook"
+              />
+              {/* قناة واتساب */}
+              {/* <SocialCard
+                name="قناة واتساب"
+                url="https://wa.me/201234567890"
+                imgSrc={undefined}
+                subtitle="تواصل مباشر"
+                iconType="whatsapp"
+              /> */}
+            </div>
           </div>
         </div>
 
