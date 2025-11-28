@@ -11,13 +11,16 @@ const Header = () => {
   const { theme, setTheme } = useTheme();
 
   const navItems = [
-    { title: "الرئيسية", path: "/" },
+     { title: "الرئيسية", path: "/" },
     { title: "عن الدار", path: "/about" },
     { title: "المعلمون", path: "/teachers" },
     { title: "الخريجون", path: "/graduates" },
+    { title: "المجلة", path: "/magazine" },
     { title: "المصحف الشريف", path: "/quran" },
     { title: "الأذكار", path: "/azkar" },
     { title: "موقعنا", path: "/location" },
+    { title: "تواصل معنا", path: "/contact" },
+    { title: "لوحة التحكم", path: "/auth" },
   ];
 
   return (

@@ -52,15 +52,15 @@ export const FloatingActionButton = ({
   const getPositionClasses = () => {
     switch (position) {
       case "bottom-right":
-        return "bottom-6 right-6";
+        return "bottom-20 right-2";
       case "bottom-left":
-        return "bottom-6 left-6";
+        return "bottom-20 left-2";
       case "top-right":
-        return "top-6 right-6";
+        return "top-20 right-2";
       case "top-left":
-        return "top-6 left-6";
+        return "top-20 left-2";
       default:
-        return "bottom-6 right-6";
+        return "bottom-20 right-2";
     }
   };
 

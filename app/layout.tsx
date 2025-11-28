@@ -7,6 +7,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { FloatingActionButton } from "@/components/FloatingActionButton";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { QuranPlayer } from "@/components/QuranPlayer";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -50,12 +53,19 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="light">
             <TooltipProvider>
-              {children}
-              <FloatingActionButton 
-            type="whatsapp"
-            phoneNumber="966500000000"
-            message="مرحباً، أود الاستفسار عن دار الإحسان لتحفيظ القرآن الكريم"
-          />
+              <div className="flex flex-col min-h-screen">
+                <Header />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <FloatingActionButton
+                type="whatsapp"
+                phoneNumber="+201159556715"
+                message="مرحباً، أود الاستفسار عن دار الإحسان لتحفيظ القرآن الكريم"
+              />
+               <QuranPlayer />
               <Toaster />
               <Sonner />
             </TooltipProvider>

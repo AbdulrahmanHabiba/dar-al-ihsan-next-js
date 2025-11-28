@@ -1,6 +1,6 @@
 import { BookOpen, Mail, MapPin, Phone } from "lucide-react";
 import { NavLink } from "./NavLink";
-import { SocialCard } from "./ui/SocialCard";
+import { SocialCard } from "./SocialCard";
 
 const Footer = () => {
   return (
@@ -19,13 +19,13 @@ const Footer = () => {
                 </h3>
               </div>
             </div>
-            <div className="flex flex-row items-start gap-2 mt-2" style={{alignItems: 'flex-start'}}>
+            <div className="flex flex-row items-start gap-2 mt-2" style={{ alignItems: 'flex-start' }}>
               <div className="flex flex-col items-start text-right ">
                 <span className="text-sm text-muted-foreground">تحت رعاية وإشراف الأزهر الشريف</span>
                 <span className="text-sm text-muted-foreground">ترخيص رقم 828 لسنة 2011</span>
               </div>
-              <span className="inline-flex justify-center items-start ms-2" style={{height: '4em'}}>
-                <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{height:"2.9em", maxHeight:"3.8em", width: "auto", objectFit:"contain"}} />
+              <span className="inline-flex justify-center items-start ms-2" style={{ height: '4em' }}>
+                <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{ height: "2.9em", maxHeight: "3.8em", width: "auto", objectFit: "contain" }} />
               </span>
             </div>
           </div>
@@ -88,7 +88,7 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+20 123 456 7890</span>
+                <span>01159556715</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4" />
@@ -125,7 +125,7 @@ const Footer = () => {
               {/* قناة واتساب */}
               {/* <SocialCard
                 name="قناة واتساب"
-                url="https://wa.me/201234567890"
+                url="https://wa.me/201159556715"
                 imgSrc={undefined}
                 subtitle="تواصل مباشر"
                 iconType="whatsapp"
