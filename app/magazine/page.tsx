@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 // import { supabase } from "@/integrations/supabase/client";
 import { NewsCarousel } from "@/components/NewsCarousel";
@@ -18,8 +18,8 @@ interface NewsItem {
 }
 
 const Magazine = () => {
-    const searchParams = useSearchParams();
-    const newsId = searchParams.get("news");
+    // const searchParams = useSearchParams();
+    // const newsId = searchParams.get("news");
     const [news, setNews] = useState<NewsItem[]>([]);
     const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
@@ -27,18 +27,18 @@ const Magazine = () => {
         fetchNews();
     }, []);
 
-    useEffect(() => {
-        if (newsId && news.length > 0) {
-            const found = news.find(n => n.id === newsId);
-            if (found) {
-                setSelectedNews(found);
-                // Scroll to news section
-                setTimeout(() => {
-                    document.getElementById("news-section")?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
-            }
-        }
-    }, [newsId, news]);
+    // useEffect(() => {
+    //     if (newsId && news.length > 0) {
+    //         const found = news.find(n => n.id === newsId);
+    //         if (found) {
+    //             setSelectedNews(found);
+    //             // Scroll to news section
+    //             setTimeout(() => {
+    //                 document.getElementById("news-section")?.scrollIntoView({ behavior: "smooth" });
+    //             }, 100);
+    //         }
+    //     }
+    // }, [newsId, news]);
 
     const fetchNews = async () => {
         // const { data, error } = await supabase
@@ -136,3 +136,8 @@ const Magazine = () => {
 };
 
 export default Magazine;
+/*
+git add .
+git commit -m "fix error in magazine page"
+git push
+*/
