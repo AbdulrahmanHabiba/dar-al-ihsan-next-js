@@ -3,6 +3,7 @@
 import { MessageCircle, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export type FloatingActionType = "whatsapp" | "messenger" | "custom";
 
@@ -64,10 +65,14 @@ export const FloatingActionButton = ({
     }
   };
 
-  const getColorClasses = () => {
-    if (type === "whatsapp") return "bg-green-500 hover:bg-green-600";
-    if (type === "messenger") return "bg-blue-500 hover:bg-blue-600";
-    return "bg-primary hover:bg-primary/90";
+  // const getColorClasses = () => {
+  //   if (type === "whatsapp") return "bg-green-500 hover:bg-green-600";
+  //   if (type === "messenger") return "bg-blue-500 hover:bg-blue-600";
+  //   return "bg-primary hover:bg-primary/90";
+  // };
+  const getIconImage = () => {
+    if (type === "messenger") return <Image src="/messenger.svg" alt="messenger" width={48} height={48} />;
+    return <Image src="/whatsapp.svg" alt="whatsapp" width={48} height={48} />;
   };
 
   return (
@@ -81,7 +86,8 @@ export const FloatingActionButton = ({
         className
       )}
     >
-      <Button
+      {getIconImage()}
+      {/* <Button
         size="icon"
         className={cn(
           "h-14 w-14 rounded-full shadow-lg transition-all duration-300 group-hover:scale-110",
@@ -89,7 +95,7 @@ export const FloatingActionButton = ({
         )}
       >
         {getIcon()}
-      </Button>
+      </Button> */}
     </a>
   );
 };

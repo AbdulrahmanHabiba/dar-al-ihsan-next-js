@@ -10,10 +10,10 @@ const Contact = () => {
 
         <p className="text-muted-foreground text-lg leading-relaxed">
           يسعدنا تواصلك معنا في أي وقت.  
-          يمكنك من خلال هذا النموذج إرسال <span className="font-semibold text-foreground">استفسار عام</span>  
-          أو <span className="font-semibold text-foreground">شكاوى واقتراحات</span> 
+          يمكنك من خلال هذا النموذج إرسال <span className="font-semibold text-foreground"> استفسار عام </span>  
+          أو <span className="font-semibold text-foreground"> شكاوى واقتراحات </span> 
           بخصوص الدار أو أنشطتنا.  
-          نحرص دائمًا على قراءة جميع الرسائل والرد في أقرب وقت ممكن.
+      
         </p>
       </div>
 

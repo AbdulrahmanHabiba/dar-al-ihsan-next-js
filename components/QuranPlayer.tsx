@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import {
     Sheet,
+    SheetClose,
     SheetContent,
     SheetDescription,
     SheetHeader,
@@ -123,6 +124,10 @@ export const QuranPlayer = () => {
         }
     };
 
+    useEffect(() => {
+        togglePlay();
+    }, []);
+
     const changeRadio = (radio: Radio) => {
         if (audioRef.current) {
             audioRef.current.pause();
@@ -156,23 +161,29 @@ export const QuranPlayer = () => {
             <div className="container mx-auto px-4 py-3">
                 <div className="flex items-center justify-between gap-4">
                     {/* LEFT: Avatar + info */}
-                    <div className="flex-1 min-w-0 flex items-center gap-4">
-                        <Avatar className="h-12 w-12 shrink-0">
+                    <div className="min-w-0 flex items-center gap-4">
+                        <Avatar className="sm:h-12 sm:w-12 h-10 w-10 shrink-0">
                             <AvatarImage src={currentRadio.img} alt={currentRadio.name} />
                             <AvatarFallback>{currentRadio.name[0]}</AvatarFallback>
                         </Avatar>
 
                         <div className="min-w-0">
-                            <p className="font-medium truncate">{currentRadio.name}</p>
-                            <p className="text-sm text-muted-foreground">إذاعة القرآن الكريم</p>
+                            <p className="font-medium truncate text-sm md:text-base">
+                                {currentRadio.name}
+                            </p>
+
+                            <p className="text-muted-foreground text-xs md:text-sm">
+                                إذاعة القرآن الكريم
+                            </p>
                         </div>
+
                     </div>
 
                     {/* CENTER: Error message only */}
                     <div className="flex-1 min-w-0 flex items-center justify-center">
                         {error && (
                             <div className="text-center">
-                                <p className="text-lg text-destructive font-medium animate-pulse">
+                                <p className="sm:text-lg text-sm text-destructive font-medium animate-pulse">
                                     <span className="hidden md:inline">حدث خطأ أثناء تشغيل الصوت، اختر إذاعة أخرى</span>
                                     <span className="md:hidden">جرب إذاعة أخرى</span>
                                 </p>
@@ -189,22 +200,22 @@ export const QuranPlayer = () => {
                                 onClick={handlePrevious}
                                 disabled={radios.length === 0 || isLoading}
                             >
-                                <SkipBack className="h-4 w-4" />
+                                <SkipBack className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
 
                             <Button
                                 variant="default"
                                 size="icon"
                                 onClick={togglePlay}
-                                className="h-10 w-10"
+                                className="sm:h-10 sm:w-10 h-8 w-8"
                                 disabled={isLoading}
                             >
                                 {isLoading ? (
-                                    <Loader2 className="h-4 w-4 animate-spin" />
+                                    <Loader2 className="h-3 w-3 sm:h-4 sm:w-4 animate-spin" />
                                 ) : isPlaying ? (
-                                    <Pause className="h-4 w-4" />
+                                    <Pause className="h-3 w-3 sm:h-4 sm:w-4" />
                                 ) : (
-                                    <Play className="h-4 w-4" />
+                                    <Play className="h-3 w-3 sm:h-4 sm:w-4" />
                                 )}
                             </Button>
 
@@ -214,16 +225,16 @@ export const QuranPlayer = () => {
                                 onClick={handleNext}
                                 disabled={radios.length === 0 || isLoading}
                             >
-                                <SkipForward className="h-4 w-4" />
+                                <SkipForward className="h-3 w-3 sm:h-4 sm:w-4" />
                             </Button>
                         </div>
 
                         <div className="hidden md:flex items-center gap-2 w-32">
                             <Button variant="ghost" size="icon" onClick={toggleMute}>
                                 {isMuted ? (
-                                    <VolumeX className="h-4 w-4" />
+                                    <VolumeX className="h-3 w-3 sm:h-4 sm:w-4" />
                                 ) : (
-                                    <Volume2 className="h-4 w-4" />
+                                    <Volume2 className="h-3 w-3 sm:h-4 sm:w-4" />
                                 )}
                             </Button>
                             <Slider
@@ -241,7 +252,7 @@ export const QuranPlayer = () => {
                         <Sheet>
                             <SheetTrigger asChild>
                                 <Button variant="outline" size="icon">
-                                    <List className="h-4 w-4" />
+                                    <List className="h-3 w-3 sm:h-4 sm:w-4" />
                                 </Button>
                             </SheetTrigger>
                             <SheetContent side="bottom" className="h-[80vh]">
@@ -251,18 +262,19 @@ export const QuranPlayer = () => {
                                 </SheetHeader>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6 overflow-y-auto max-h-[calc(80vh-120px)]">
                                     {radios.map((radio) => (
-                                        <button
-                                            key={radio.id}
-                                            onClick={() => changeRadio(radio)}
-                                            className={`flex items-center gap-3 p-3 rounded-lg border hover:bg-accent transition-colors ${currentRadio.id === radio.id ? "bg-accent border-primary" : ""
-                                                }`}
-                                        >
-                                            <Avatar className="h-12 w-12">
-                                                <AvatarImage src={radio.img} alt={radio.name} />
-                                                <AvatarFallback>{radio.name[0]}</AvatarFallback>
-                                            </Avatar>
-                                            <span className="font-medium text-right flex-1">{radio.name}</span>
-                                        </button>
+                                        <SheetClose key={radio.id} asChild>
+                                            <button
+                                                onClick={() => changeRadio(radio)}
+                                                className={`flex items-center gap-3 p-3 rounded-lg border hover:bg-accent transition-colors ${currentRadio.id === radio.id ? "bg-accent border-primary" : ""
+                                                    }`}
+                                            >
+                                                <Avatar className="h-12 w-12">
+                                                    <AvatarImage src={radio.img} alt={radio.name} />
+                                                    <AvatarFallback>{radio.name[0]}</AvatarFallback>
+                                                </Avatar>
+                                                <span className="font-medium text-right flex-1">{radio.name}</span>
+                                            </button>
+                                        </SheetClose>
                                     ))}
                                 </div>
                             </SheetContent>

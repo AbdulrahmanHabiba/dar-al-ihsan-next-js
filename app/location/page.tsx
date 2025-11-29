@@ -2,6 +2,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import Image from "next/image";
 
 const Location = () => {
   return (
@@ -18,7 +19,14 @@ const Location = () => {
             </h1>
             <div className="flex flex-col items-center gap-2 mb-4">
               <span className="text-md text-muted-foreground font-semibold">تحت رعاية وإشراف الأزهر الشريف &ndash; ترخيص رقم 828 لسنة 2011</span>
-              <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{ height: 32, width: "auto" }} />
+              <div className="relative h-8 w-auto aspect-[3/1]">
+                <Image
+                  src="/azhar-logo-modern.png"
+                  alt="شعار الأزهر الشريف"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
             <p className="text-xl text-muted-foreground">
               نحن في انتظارك، تفضل بزيارتنا في أي وقت

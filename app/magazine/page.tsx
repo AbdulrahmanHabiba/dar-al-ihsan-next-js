@@ -136,8 +136,3 @@ const Magazine = () => {
 };
 
 export default Magazine;
-/*
-git add .
-git commit -m "fix error in magazine page"
-git push
-*/

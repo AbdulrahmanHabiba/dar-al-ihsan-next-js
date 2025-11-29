@@ -24,30 +24,54 @@ export function SocialCard({ name, url, imgSrc, subtitle, iconType }: SocialCard
   };
   return (
     <Link href={url} target="_blank" rel="noopener noreferrer">
-      <Card className="text-center min-w-[9rem] max-w-[20rem] h-32 min-h-[8rem] max-h-[9rem] flex flex-col items-center justify-center hover:shadow-glow transition-all duration-300 cursor-pointer">
-        <CardContent className="flex  items-center justify-center gap-2 p-4">
-          <Avatar className="h-14 w-14 mb-2 bg-muted">
-            {imgSrc ? (
-              <AvatarImage src={imgSrc} alt={name} />
-            ) : (
-              <span className="flex w-full h-full">{renderIcon()}</span>
-            )}
-            <AvatarFallback>
-              {name[0]}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="font-bold text-xs line-clamp-2 w-full">
-              {name}
-            </div>
-            {subtitle &&
-              <div className="text-xs text-muted-foreground line-clamp-1">
-                {subtitle}
-              </div>}
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+  <Card 
+    className="
+      text-center 
+      w-full 
+      max-w-[20rem] 
+      max-h-28 
+      flex 
+      items-center 
+      justify-center 
+      rounded-3xl
+      hover:shadow-md 
+      transition-all 
+      duration-300 
+      cursor-pointer 
+      px-4
+      py-2
+      
+    "
+  >
+    <CardContent className="flex items-center justify-center gap-4 p-0">
+      
+      <Avatar className="h-12 w-12 bg-muted rounded-full">
+        {imgSrc ? (
+          <AvatarImage src={imgSrc} alt={name} />
+        ) : (
+          <span className="flex items-center justify-center w-full h-full">
+            {renderIcon()}
+          </span>
+        )}
+        <AvatarFallback>{name[0]}</AvatarFallback>
+      </Avatar>
+
+      <div className="flex flex-col text-right leading-tight">
+        <span className="font-semibold text-sm line-clamp-1">
+          {name}
+        </span>
+
+        {subtitle && (
+          <span className="text-xs text-muted-foreground line-clamp-1">
+            {subtitle}
+          </span>
+        )}
+      </div>
+
+    </CardContent>
+  </Card>
+</Link>
+
   );
 }
 

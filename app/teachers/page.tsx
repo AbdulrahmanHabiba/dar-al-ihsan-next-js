@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, BookOpen, GraduationCap } from "lucide-react";
+import Image from "next/image";
 
 const Teachers = () => {
   const teachers = [
@@ -57,106 +58,108 @@ const Teachers = () => {
 
   return (
     <>
-    {/* Page Header */}
-    <section className="py-20 bg-gradient-hero">
-      <div className="container">
-        <div className="max-w-3xl mx-auto text-center animate-slideUp">
-          <h1 className="text-5xl font-bold mb-6">معلمونا</h1>
-          <p className="text-xl text-muted-foreground">
-            نخبة من المعلمين المتخصصين في علوم القرآن والتجويد
-          </p>
-        </div>
-      </div>
-    </section>
-
-    {/* Stats */}
-    <section className="py-12 bg-card border-y border-border">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
-          <div>
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
-              <BookOpen className="h-7 w-7 text-primary-foreground" />
-            </div>
-            <div className="text-3xl font-bold text-gradient-primary mb-1">50+</div>
-            <div className="text-muted-foreground">معلم ومعلمة</div>
-          </div>
-          <div>
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
-              <Award className="h-7 w-7 text-primary-foreground" />
-            </div>
-            <div className="text-3xl font-bold text-gradient-primary mb-1">200+</div>
-            <div className="text-muted-foreground">إجازة معتمدة</div>
-          </div>
-          <div>
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
-              <GraduationCap className="h-7 w-7 text-primary-foreground" />
-            </div>
-            <div className="text-3xl font-bold text-gradient-primary mb-1">15+</div>
-            <div className="text-muted-foreground">سنة خبرة</div>
+      {/* Page Header */}
+      <section className="py-20 bg-gradient-hero">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center animate-slideUp">
+            <h1 className="text-5xl font-bold mb-6">معلمونا</h1>
+            <p className="text-xl text-muted-foreground">
+              نخبة من المعلمين المتخصصين في علوم القرآن والتجويد
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Teachers Grid */}
-    <section className="py-20">
-      <div className="container">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teachers.map((teacher, index) => (
-            <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group">
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img
-                  src={teacher.image}
-                  alt={teacher.name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
+      {/* Stats */}
+      <section className="py-12 bg-card border-y border-border">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto text-center">
+            <div>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
+                <BookOpen className="h-7 w-7 text-primary-foreground" />
               </div>
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold mb-1">{teacher.name}</h3>
-                <p className="text-primary font-medium mb-3">{teacher.title}</p>
-
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary">{teacher.specialization}</Badge>
-                  </div>
-                  <div className="text-sm text-muted-foreground">
-                    <span className="font-medium">الخبرة:</span> {teacher.experience}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-sm font-medium mb-2">المؤهلات:</p>
-                  <ul className="space-y-1">
-                    {teacher.qualifications.map((qual, i) => (
-                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{qual}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+              <div className="text-3xl font-bold text-gradient-primary mb-1">50+</div>
+              <div className="text-muted-foreground">معلم ومعلمة</div>
+            </div>
+            <div>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
+                <Award className="h-7 w-7 text-primary-foreground" />
+              </div>
+              <div className="text-3xl font-bold text-gradient-primary mb-1">200+</div>
+              <div className="text-muted-foreground">إجازة معتمدة</div>
+            </div>
+            <div>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gradient-primary mb-3">
+                <GraduationCap className="h-7 w-7 text-primary-foreground" />
+              </div>
+              <div className="text-3xl font-bold text-gradient-primary mb-1">15+</div>
+              <div className="text-muted-foreground">سنة خبرة</div>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Join CTA */}
-    <section className="py-20 bg-gradient-primary text-primary-foreground">
-      <div className="container text-center">
-        <div className="max-w-3xl mx-auto animate-slideUp">
-          <h2 className="text-4xl font-bold mb-4">هل تريد الانضمام لفريق المعلمين؟</h2>
-          <p className="text-xl mb-8 opacity-90">
-            إذا كنت حاصلاً على إجازة في القرآن الكريم ولديك خبرة في التدريس، نرحب بانضمامك لفريقنا
-          </p>
-          <button className="px-8 py-4 bg-background text-foreground rounded-lg font-bold text-lg hover:scale-105 transition-transform shadow-elegant">
-            تواصل معنا
-          </button>
+      {/* Teachers Grid */}
+      <section className="py-20">
+        <div className="container">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {teachers.map((teacher, index) => (
+              <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group">
+                <div className="aspect-square overflow-hidden bg-muted relative">
+                  <Image
+                    src={teacher.image}
+                    alt={teacher.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-1">{teacher.name}</h3>
+                  <p className="text-primary font-medium mb-3">{teacher.title}</p>
+
+                  <div className="space-y-3 mb-4">
+                    <div className="flex items-center gap-2">
+                      <Badge variant="secondary">{teacher.specialization}</Badge>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      <span className="font-medium">الخبرة:</span> {teacher.experience}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-sm font-medium mb-2">المؤهلات:</p>
+                    <ul className="space-y-1">
+                      {teacher.qualifications.map((qual, i) => (
+                        <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                          <span className="text-primary mt-1">•</span>
+                          <span>{qual}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </>
+      </section>
+
+      {/* Join CTA */}
+      <section className="py-20 bg-gradient-primary text-primary-foreground">
+        <div className="container text-center">
+          <div className="max-w-3xl mx-auto animate-slideUp">
+            <h2 className="text-4xl font-bold mb-4">هل تريد الانضمام لفريق المعلمين؟</h2>
+            <p className="text-xl mb-8 opacity-90">
+              إذا كنت حاصلاً على إجازة في القرآن الكريم ولديك خبرة في التدريس، نرحب بانضمامك لفريقنا
+            </p>
+            <button className="px-8 py-4 bg-background text-foreground rounded-lg font-bold text-lg hover:scale-105 transition-transform shadow-elegant">
+              تواصل معنا
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

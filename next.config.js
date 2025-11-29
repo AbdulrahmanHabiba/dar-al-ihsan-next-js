@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'pbs.twimg.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'scontent.fcai11-1.fna.fbcdn.net',
+      },
     ],
   },
   // Note: i18n is not supported in App Router

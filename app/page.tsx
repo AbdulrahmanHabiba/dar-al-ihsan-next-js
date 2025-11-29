@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Award, GraduationCap, Star, Heart } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import Image from "next/image";
 
 const Index = () => {
   const features = [
@@ -40,7 +41,7 @@ const Index = () => {
     <>
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-hero overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1920&auto=format&fit=crop')] bg-cover bg-center opacity-[0.07]"></div>
 
         <div className="container relative z-10">
           <div className="max-w-4xl mx-auto text-center animate-slideUp">
@@ -56,7 +57,14 @@ const Index = () => {
             </h1>
             <div className="flex flex-col items-center gap-2 mb-4">
               <span className="text-md text-muted-foreground font-semibold">تحت رعاية وإشراف الأزهر الشريف &ndash; ترخيص رقم 828 لسنة 2011</span>
-              <img src="/azhar-logo-modern.png" alt="شعار الأزهر الشريف" style={{ height: 32, width: "auto" }} />
+              <div className="relative h-8 w-auto aspect-[3/1]">
+                <Image
+                  src="/azhar-logo-modern.png"
+                  alt="شعار الأزهر الشريف"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
 
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">

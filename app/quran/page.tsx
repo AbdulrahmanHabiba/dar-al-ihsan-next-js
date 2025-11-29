@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BookOpen, Search, Volume2, Download } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
 const Quran = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -38,161 +39,163 @@ const Quran = () => {
 
   return (
     <>
-    {/* Page Header */}
-    <section className="py-20 bg-gradient-hero">
-      <div className="container">
-        <div className="max-w-3xl mx-auto text-center animate-slideUp">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-primary mb-6 shadow-glow">
-            <BookOpen className="h-10 w-10 text-primary-foreground" />
-          </div>
-          <h1 className="text-5xl font-bold mb-6">المصحف الشريف</h1>
-          <p className="text-xl text-muted-foreground">
-            اقرأ واستمع إلى القرآن الكريم بصوت أشهر القراء
-          </p>
-        </div>
-      </div>
-    </section>
-
-    {/* Features */}
-    <section className="py-12 bg-card border-y border-border">
-      <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
-              <BookOpen className="h-6 w-6 text-primary-foreground" />
+      {/* Page Header */}
+      <section className="py-20 bg-gradient-hero">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center animate-slideUp">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-primary mb-6 shadow-glow">
+              <BookOpen className="h-10 w-10 text-primary-foreground" />
             </div>
-            <h3 className="font-semibold mb-1">القراءة</h3>
-            <p className="text-sm text-muted-foreground">نص واضح بالرسم العثماني</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
-              <Volume2 className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <h3 className="font-semibold mb-1">الاستماع</h3>
-            <p className="text-sm text-muted-foreground">بصوت أشهر القراء</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
-              <Download className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <h3 className="font-semibold mb-1">التحميل</h3>
-            <p className="text-sm text-muted-foreground">حمّل السور للاستماع لاحقاً</p>
+            <h1 className="text-5xl font-bold mb-6">المصحف الشريف</h1>
+            <p className="text-xl text-muted-foreground">
+              اقرأ واستمع إلى القرآن الكريم بصوت أشهر القراء
+            </p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    {/* Search and Surahs List */}
-    <section className="py-20">
-      <div className="container max-w-5xl">
-        {/* Search */}
-        <div className="mb-8">
-          <div className="relative">
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="ابحث عن سورة..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pr-10 h-12 text-lg"
-            />
-          </div>
-        </div>
-
-        {/* Info Card */}
-        <Card className="mb-8 shadow-elegant bg-gradient-hero">
-          <CardContent className="p-6">
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center">
+      {/* Features */}
+      <section className="py-12 bg-card border-y border-border">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
                 <BookOpen className="h-6 w-6 text-primary-foreground" />
               </div>
-              <div>
-                <h3 className="text-lg font-bold mb-2">قريباً: القرآن الكريم التفاعلي</h3>
-                <p className="text-muted-foreground">
-                  نعمل حالياً على إضافة خدمة القرآن الكريم الكاملة مع إمكانية القراءة والاستماع والتحميل.
-                  سيتم الربط مع API متخصصة توفر النص والصوت بجودة عالية.
-                </p>
-              </div>
+              <h3 className="font-semibold mb-1">القراءة</h3>
+              <p className="text-sm text-muted-foreground">نص واضح بالرسم العثماني</p>
             </div>
-          </CardContent>
-        </Card>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
+                <Volume2 className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h3 className="font-semibold mb-1">الاستماع</h3>
+              <p className="text-sm text-muted-foreground">بصوت أشهر القراء</p>
+            </div>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-primary mb-3">
+                <Download className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <h3 className="font-semibold mb-1">التحميل</h3>
+              <p className="text-sm text-muted-foreground">حمّل السور للاستماع لاحقاً</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Surahs Grid */}
-        <div className="grid gap-4">
-          {filteredSurahs.map((surah) => (
-            <Card key={surah.number} className="shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-4 flex-1">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center font-bold text-primary-foreground">
-                      {surah.number}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-1">سورة {surah.name}</h3>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span>{surah.type}</span>
-                        <span>•</span>
-                        <span>{surah.verses} آية</span>
+      {/* Search and Surahs List */}
+      <section className="py-20">
+        <div className="container max-w-5xl">
+          {/* Search */}
+          <div className="mb-8">
+            <div className="relative">
+              <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="ابحث عن سورة..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pr-10 h-12 text-lg"
+              />
+            </div>
+          </div>
+
+          {/* Info Card */}
+          <Card className="mb-8 shadow-elegant bg-gradient-hero">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center">
+                  <BookOpen className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold mb-2">قريباً: القرآن الكريم التفاعلي</h3>
+                  <p className="text-muted-foreground">
+                    نعمل حالياً على إضافة خدمة القرآن الكريم الكاملة مع إمكانية القراءة والاستماع والتحميل.
+                    سيتم الربط مع API متخصصة توفر النص والصوت بجودة عالية.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Surahs Grid */}
+          <div className="grid gap-4">
+            {filteredSurahs.map((surah) => (
+              <Card key={surah.number} className="shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4 flex-1">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-primary flex items-center justify-center font-bold text-primary-foreground">
+                        {surah.number}
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold mb-1">سورة {surah.name}</h3>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span>{surah.type}</span>
+                          <span>•</span>
+                          <span>{surah.verses} آية</span>
+                        </div>
                       </div>
                     </div>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+                        <Volume2 className="h-5 w-5" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+                        <BookOpen className="h-5 w-5" />
+                      </Button>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-                      <Volume2 className="h-5 w-5" />
-                    </Button>
-                    <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-                      <BookOpen className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {filteredSurahs.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">لم يتم العثور على نتائج</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        )}
-      </div>
-    </section>
 
-    {/* Popular Reciters */}
-    <section className="py-20 bg-gradient-hero">
-      <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold mb-4">القراء المشهورون</h2>
-          <p className="text-muted-foreground text-lg">
-            استمع للقرآن الكريم بصوت أشهر القراء
-          </p>
+          {filteredSurahs.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">لم يتم العثور على نتائج</p>
+            </div>
+          )}
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {[
-            { name: "الشيخ محمود خليل الحصري", image: "https://cdn.islam-online.net/data/full/mahmoud-al-hussary/profile.jpg" },
-            { name: "الشيخ محمد صديق المنشاوي", image: "https://cdn.islam-online.net/data/full/almenshawy/profile.jpg" },
-            { name: "الشيخ عبد الباسط عبد الصمد", image: "https://cdn.islam-online.net/data/full/abdel-baset-abdel-samad/profile.jpg" },
-            { name: "الشيخ ماهر المعيقلي", image: "https://cdn.islam-online.net/data/full/maher-al-muaiqly/profile.jpg" },
-            { name: "الشيخ سعد الغامدي", image: "https://cdn.islam-online.net/data/full/saad-al-ghamdy/profile.jpg" },
-          ].map((reciter, index) => (
-            <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer">
-              <div className="aspect-square overflow-hidden bg-muted">
-                <img
-                  src={reciter.image}
-                  alt={reciter.name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
-              <CardContent className="p-4 text-center">
-                <h4 className="font-bold">{reciter.name}</h4>
-              </CardContent>
-            </Card>
-          ))}
+      {/* Popular Reciters */}
+      <section className="py-20 bg-gradient-hero">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">القراء المشهورون</h2>
+            <p className="text-muted-foreground text-lg">
+              استمع للقرآن الكريم بصوت أشهر القراء
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {[
+              { name: "الشيخ محمود خليل الحصري", image: "https://cdn.islam-online.net/data/full/mahmoud-al-hussary/profile.jpg" },
+              { name: "الشيخ محمد صديق المنشاوي", image: "https://cdn.islam-online.net/data/full/almenshawy/profile.jpg" },
+              { name: "الشيخ عبد الباسط عبد الصمد", image: "https://cdn.islam-online.net/data/full/abdel-baset-abdel-samad/profile.jpg" },
+              { name: "الشيخ ماهر المعيقلي", image: "https://cdn.islam-online.net/data/full/maher-al-muaiqly/profile.jpg" },
+              { name: "الشيخ سعد الغامدي", image: "https://cdn.islam-online.net/data/full/saad-al-ghamdy/profile.jpg" },
+            ].map((reciter, index) => (
+              <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group cursor-pointer">
+                <div className="aspect-square overflow-hidden bg-muted relative">
+                  <Image
+                    src={reciter.image}
+                    alt={reciter.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+                <CardContent className="p-4 text-center">
+                  <h4 className="font-bold">{reciter.name}</h4>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </>
+      </section>
+    </>
   );
 };
 

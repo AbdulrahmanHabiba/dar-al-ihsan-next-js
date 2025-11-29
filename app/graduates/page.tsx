@@ -2,6 +2,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Award, Trophy, Star } from "lucide-react";
+import Image from "next/image";
 
 const Graduates = () => {
   const graduates = [
@@ -123,10 +124,12 @@ const Graduates = () => {
             {graduates.map((graduate, index) => (
               <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group">
                 <div className="aspect-[4/3] overflow-hidden bg-muted relative">
-                  <img
+                  <Image
                     src={graduate.image}
                     alt={graduate.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute top-4 left-4">
                     <Badge className="bg-gradient-gold text-foreground shadow-elegant">
@@ -172,11 +175,14 @@ const Graduates = () => {
             <Card className="shadow-elegant">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4 mb-4">
-                  <img
-                    src="https://plus.unsplash.com/premium_photo-1678559460700-8a1d42ce8239?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bXVzbGltJTIwbWFufGVufDB8fDB8fHww"
-                    alt="محمد عبد الله"
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                    <Image
+                      src="https://plus.unsplash.com/premium_photo-1678559460700-8a1d42ce8239?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bXVzbGltJTIwbWFufGVufDB8fDB8fHww"
+                      alt="محمد عبد الله"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div>
                     <h4 className="font-bold text-lg">محمد عبد الله</h4>
                     <p className="text-sm text-muted-foreground">خريج 2023</p>
@@ -192,11 +198,14 @@ const Graduates = () => {
             <Card className="shadow-elegant">
               <CardContent className="p-8">
                 <div className="flex items-start gap-4 mb-4">
-                  <img
-                    src="https://images.unsplash.com/photo-1648593470206-64f8690efeff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fG11c2xpbSUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D"
-                    alt="فاطمة أحمد"
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                    <Image
+                      src="https://images.unsplash.com/photo-1648593470206-64f8690efeff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fG11c2xpbSUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D"
+                      alt="فاطمة أحمد"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                   <div>
                     <h4 className="font-bold text-lg">فاطمة أحمد</h4>
                     <p className="text-sm text-muted-foreground">خريجة 2023</p>
