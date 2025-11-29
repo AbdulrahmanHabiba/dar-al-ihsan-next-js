@@ -40,6 +40,8 @@ export function SocialCard({ name, url, imgSrc, subtitle, iconType }: SocialCard
       cursor-pointer 
       px-4
       py-2
+      min-w-[15rem]
+      sm:w-auto
       
     "
   >
