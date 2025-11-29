@@ -112,7 +112,7 @@ const Footer = () => {
           {/* Social/Official Pages */}
           <div className="text-center mt-4">
             <h4 className="font-semibold text-center bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">تابعنا على منصات التواصل .</h4>
-            <div className="flex justify-center items-center gap-3 flex-col sm:flex-row">
+            <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
               {/* صفحة الفيسبوك */}
               <SocialCard
                 name="صفحة الفيسبوك"
