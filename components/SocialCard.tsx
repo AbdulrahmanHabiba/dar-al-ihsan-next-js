@@ -41,7 +41,6 @@ export function SocialCard({ name, url, imgSrc, subtitle, iconType }: SocialCard
       px-4
       py-2
       min-w-[15rem]
-      sm:min-w-[20rem]
       md:w-auto
       
     "
