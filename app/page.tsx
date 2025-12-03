@@ -1,12 +1,28 @@
 
-import NewsSlider from "@/components/NewsSlider";
+import NewsSlider from "@/components/home/NewsSlider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Award, GraduationCap, Star, Heart } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import Image from "next/image";
+import { News } from "@/types/news";
 
-const Index = () => {
+async function getNews(): Promise<News[]> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/news`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.data || [];
+  } catch (error) {
+    console.error("Failed to fetch news:", error);
+    return [];
+  }
+}
+
+
+const HomePage = async () => {
   const features = [
     {
       icon: BookOpen,
@@ -37,7 +53,12 @@ const Index = () => {
     { number: "15+", label: "سنة خبرة" }
   ];
 
+  const initialNews = await getNews();
+
+ 
+
   return (
+
     <>
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-hero overflow-hidden">
@@ -143,4 +164,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default HomePage;

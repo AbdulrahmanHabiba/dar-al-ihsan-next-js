@@ -2,6 +2,7 @@ import { BookOpen, Mail, MapPin, Phone } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { SocialCard } from "./SocialCard";
 import Image from "next/image";
+import FooterCopyright from "./FooterCopyright";
 
 const Footer = () => {
   return (
@@ -115,9 +116,8 @@ const Footer = () => {
             <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
               {/* صفحة الفيسبوك */}
               <SocialCard
-                name="صفحة الفيسبوك"
+                name="صفحة الدار على الفيسبوك"
                 url="https://www.facebook.com/profile.php?id=100013462008509"
-                // استخدم Lucide facebook icon بدلاً من imgSrc
                 imgSrc={"https://scontent.fcai11-1.fna.fbcdn.net/v/t39.30808-1/238374365_1278677039257684_6726629224603724103_n.jpg?stp=cp0_dst-jpg_s80x80_tt6&_nc_cat=103&ccb=1-7&_nc_sid=9a2c5d&_nc_eui2=AeHWYXdLcPMc9nNa43mCDW0sOWYeh1zbub05Zh6HXNu5vdpTK8bw23g7Ry23QT2vAEck2tTWBi-nNgZmNKRAj11B&_nc_ohc=8H_9UuG2-JUQ7kNvwE1Y3sh&_nc_oc=Adk55onBCPkOu5ZZGYUq0FrSZDU32HdCQ7InBC2-S5kEN93DPaU3Zz7oZXIw3-UTlBg&_nc_zt=24&_nc_ht=scontent.fcai11-1.fna&_nc_gid=Y86O3y5ecNC1WyFgiUXWyA&oh=00_AfjjHC3SWJJGcIGYLOmnueo1U3DIawV0ACpqsvB87Ifvdg&oe=69306F50"}
                 subtitle="الحساب الرسمي للدار"
                 iconType="facebook"
@@ -132,7 +132,7 @@ const Footer = () => {
               />
               {/* قناة الواتساب */}
               <SocialCard
-                name="قناة واتساب"
+                name="قناة الدار على الواتساب"
                 url="https://wa.me/201159556715"
                 imgSrc={undefined}
                 subtitle="اخر الأخبار على واتساب"
@@ -141,8 +141,9 @@ const Footer = () => {
             </div>
           </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>© 2024 دار الإحسان لتحفيظ وتجويد القرآن الكريم. جميع الحقوق محفوظة.</p>
+        <div className="mt-12 pb-10 pt-5 border-t border-border text-center text-sm text-muted-foreground">
+          {/* <p>© 2025 دار الإحسان لتحفيظ وتجويد القرآن الكريم. جميع الحقوق محفوظة.</p> */}
+          <FooterCopyright />
         </div>
       </div>
     </footer>

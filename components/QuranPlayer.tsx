@@ -157,7 +157,7 @@ export const QuranPlayer = () => {
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-background border-t shadow-lg z-50">
+        <div className="fixed bottom-0 left-0 right-0 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t shadow-lg z-50">
             <div className="container mx-auto px-4 py-3">
                 <div className="flex items-center justify-between gap-4">
                     {/* LEFT: Avatar + info */}
@@ -172,7 +172,7 @@ export const QuranPlayer = () => {
                                 {currentRadio.name}
                             </p>
 
-                            <p className="text-muted-foreground text-xs md:text-sm">
+                            <p className="text-muted-foreground text-xs md:text-sm hidden sm:block">
                                 إذاعة القرآن الكريم
                             </p>
                         </div>

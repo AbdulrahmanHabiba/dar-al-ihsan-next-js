@@ -1,7 +1,7 @@
 "use client";
 
-import { MessageCircle, Send } from "lucide-react";
-import { Button } from "@/components/ui/button";
+// import { MessageCircle, Send } from "lucide-react";
+// import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -44,11 +44,11 @@ export const FloatingActionButton = ({
     }
   };
 
-  const getIcon = () => {
-    if (customIcon) return customIcon;
-    if (type === "messenger") return <Send className="h-6 w-6" />;
-    return <MessageCircle className="h-6 w-6" />;
-  };
+  // const getIcon = () => {
+  //   if (customIcon) return customIcon;
+  //   if (type === "messenger") return <Send className="h-6 w-6" />;
+  //   return <MessageCircle className="h-6 w-6" />;
+  // };
 
   const getPositionClasses = () => {
     switch (position) {
