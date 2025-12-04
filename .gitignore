@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+
 .qodo
 
 # Editor directories and files
@@ -52,12 +53,15 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# environment variables
+.env
+
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-/src/generated/prisma
 
-/src/generated/prisma
+# prisma
+/generated/prisma
