@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,37 +8,42 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
+import { login, isAuthenticated } from "@/lib/auth";
 
 const Auth = () => {
     const router = useRouter();
     const { toast } = useToast();
     const [isLoading, setIsLoading] = useState(false);
-    const [isSignUp, setIsSignUp] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [fullName, setFullName] = useState("");
+
+    // ✅ Check if already logged in
+    useEffect(() => {
+        if (isAuthenticated()) {
+            router.push("/dashboard");
+        }
+    }, [router]);
 
     const handleEmailAuth = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
 
         try {
-            // TODO: Implement authentication logic here
-            // This is a placeholder for when you add authentication
-
-            if (isSignUp) {
-                // Sign up logic
-                toast({
-                    title: "تم إنشاء الحساب بنجاح",
-                    description: "يمكنك الآن تسجيل الدخول",
-                });
-                setIsSignUp(false);
-            } else {
-                // Sign in logic
+            // ✅ Use login function
+            const success = login(email, password);
+            
+            if (success) {
                 toast({
                     title: "تم تسجيل الدخول بنجاح",
+                    description: "جاري التوجيه إلى لوحة التحكم...",
                 });
                 router.push("/dashboard");
+            } else {
+                toast({
+                    title: "خطأ في تسجيل الدخول",
+                    description: "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+                    variant: "destructive",
+                });
             }
         } catch (error: any) {
             toast({
@@ -102,32 +107,11 @@ const Auth = () => {
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-background to-secondary/5 p-4">
             <Card className="w-full max-w-md">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-3xl font-bold">
-                        {isSignUp ? "إنشاء حساب جديد" : "تسجيل الدخول"}
-                    </CardTitle>
-                    <CardDescription>
-                        {isSignUp
-                            ? "أنشئ حسابك للوصول إلى لوحة التحكم"
-                            : "ادخل إلى لوحة التحكم"}
-                    </CardDescription>
+                    <CardTitle className="text-3xl font-bold">تسجيل الدخول</CardTitle>
+                    <CardDescription>ادخل إلى لوحة التحكم</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <form onSubmit={handleEmailAuth} className="space-y-4">
-                        {isSignUp && (
-                            <div className="space-y-2">
-                                <Label htmlFor="fullName">الاسم الكامل</Label>
-                                <Input
-                                    id="fullName"
-                                    type="text"
-                                    placeholder="أدخل اسمك الكامل"
-                                    value={fullName}
-                                    onChange={(e) => setFullName(e.target.value)}
-                                    required
-                                    disabled={isLoading}
-                                />
-                            </div>
-                        )}
-
                         <div className="space-y-2">
                             <Label htmlFor="email">البريد الإلكتروني</Label>
                             <Input
@@ -156,7 +140,7 @@ const Auth = () => {
 
                         <Button type="submit" className="w-full" disabled={isLoading}>
                             {isLoading && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
-                            {isSignUp ? "إنشاء حساب" : "تسجيل الدخول"}
+                            تسجيل الدخول
                         </Button>
                     </form>
 
@@ -197,7 +181,7 @@ const Auth = () => {
                         تسجيل الدخول بجوجل
                     </Button>
 
-                    {!isSignUp && (
+                    {/* {!isSignUp && (
                         <Button
                             type="button"
                             variant="link"
@@ -207,9 +191,9 @@ const Auth = () => {
                         >
                             هل نسيت كلمة المرور؟
                         </Button>
-                    )}
+                    )} */}
 
-                    <Button
+                    {/* <Button
                         type="button"
                         variant="ghost"
                         className="w-full"
@@ -217,7 +201,7 @@ const Auth = () => {
                         disabled={isLoading}
                     >
                         {isSignUp ? "لديك حساب؟ سجل دخول" : "ليس لديك حساب؟ سجل الآن"}
-                    </Button>
+                    </Button> */}
                 </CardContent>
             </Card>
         </div>

@@ -15,11 +15,9 @@ interface NewsDetailCardProps {
 
 export function NewsDetailCard({ news }: NewsDetailCardProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  // ✅ مرّر news.id للـ hook
   const { mutate: likeNews, isPending } = useUpdateLikes(news.id);
 
   const handleLike = () => {
-    // ✅ مرّر delta (1 للزيادة، -1 للنقصان)
     likeNews(1);
   };
 
@@ -59,7 +57,7 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
               isPending ? "animate-pulse" : ""
             } fill-red-500 text-red-500`}
           />
-          <span className="font-semibold">{news.likes}</span>
+          <span className="font-semibold !text-black dark:!text-black">{news.likes}</span>
         </Button>
       </div>
 

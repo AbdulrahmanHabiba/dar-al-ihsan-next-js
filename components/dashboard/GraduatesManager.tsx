@@ -5,12 +5,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Search, Edit, Trash2, Award } from "lucide-react";
-
-  const graduates = [
-  { id: 1, name: "محمد عبدالله", year: "2024", achievement: "حفظ كامل", grade: "ممتاز", avatar: "" },
-  { id: 2, name: "فاطمة أحمد", year: "2024", achievement: "حفظ كامل", grade: "ممتاز", avatar: "" },
-  { id: 3, name: "عمر حسن", year: "2023", achievement: "15 جزء", grade: "جيد جداً", avatar: "" },
-  ];
+import { DashboardSearchBar } from "./DashboardSearchBar";
+import { DashboardRowActions } from "./DashboardRowActions";
+import { graduatesData } from "@/lib/dashboard/mockData";
 
 export default function GraduatesManager() {
   return (
@@ -29,13 +26,10 @@ export default function GraduatesManager() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <div className="relative flex-1">
-              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="البحث عن خريج..." className="pr-10" />
-            </div>
-            <Button variant="outline">بحث</Button>
-          </div>
+          <DashboardSearchBar
+            placeholder="البحث عن خريج..."
+            onSearch={(value) => console.log("Searching graduates:", value)}
+          />
           <div className="border rounded-lg">
             <Table>
               <TableHeader>
@@ -48,7 +42,7 @@ export default function GraduatesManager() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {graduates.map((graduate) => (
+                {graduatesData.map((graduate) => (
                   <TableRow key={graduate.id}>
                     <TableCell>
                       <div className="flex items-center gap-3">
@@ -70,10 +64,12 @@ export default function GraduatesManager() {
                       <Badge variant={graduate.grade === "ممتاز" ? "default" : "secondary"}>{graduate.grade}</Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="icon"><Edit className="h-4 w-4" /></Button>
-                        <Button variant="ghost" size="icon"><Trash2 className="h-4 w-4 text-destructive" /></Button>
-                      </div>
+                      <DashboardRowActions
+                        actions={[
+                          { icon: Edit, onClick: () => console.log("Edit graduate", graduate.id) },
+                          { icon: Trash2, variant: "destructive", onClick: () => console.log("Delete graduate", graduate.id) },
+                        ]}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}

@@ -91,7 +91,7 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
                       {/* Likes Badge */}
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">
                         <Heart className="h-4 w-4 fill-red-500 text-red-500" />
-                        <span className="text-sm font-semibold">
+                        <span className="text-sm font-semibold !text-black dark:!text-black">
                           {item.likes}
                         </span>
                       </div>

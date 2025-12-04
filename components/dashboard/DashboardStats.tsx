@@ -42,7 +42,7 @@ export default function DashboardStats() {
                 <div className="bg-primary/10 p-2 rounded-full"><Newspaper className="h-4 w-4 text-primary" /></div>
                 <div className="flex-1"><p className="text-sm font-medium">تم نشر خبر جديد</p><p className="text-xs text-muted-foreground">منذ ساعتين</p></div>
               </div>
-              <div className="flex items-start gap-3 pb-3 border-b">
+              <div className="flex items-start gap-3 pb-3 border-b ">
                 <div className="bg-green-100 p-2 rounded-full"><GraduationCap className="h-4 w-4 text-green-600" /></div>
                 <div className="flex-1"><p className="text-sm font-medium">تم إضافة 3 خريجين جدد</p><p className="text-xs text-muted-foreground">منذ 5 ساعات</p></div>
               </div>

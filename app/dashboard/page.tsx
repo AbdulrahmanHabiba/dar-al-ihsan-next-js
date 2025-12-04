@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,60 +22,67 @@ import GraduatesManager from "@/components/dashboard/GraduatesManager";
 import ComplaintsManager from "@/components/dashboard/ComplaintsManager";
 import MagazineManager from "@/components/dashboard/MagazineManager";
 import SuccessStoriesManager from "@/components/dashboard/SuccessStoriesManager";
+import { logout } from "@/lib/auth";
 
 const Dashboard = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("overview");
+
+  const handleLogout = () => {
+    logout();
+    router.push("/auth");
+  };
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between flex-col sm:flex-row gap-5 sm:gap-0">
           <div className="flex items-center gap-3">
             <LayoutDashboard className="h-6 w-6 text-primary" />
             <h1 className="text-2xl font-bold">لوحة التحكم - دار التحفيظ</h1>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-right">
-              <p className="font-medium">المدير العام</p>
+            <div className="text-right flex items-center gap-3 sm:block border p-2 sm:border-none">
+              <p className="font-medium">المدير العام :</p>
               <p className="text-sm text-muted-foreground">admin@dar.com</p>
             </div>
-            <Button variant="outline" size="icon">
-              <LogOut className="h-4 w-4" />
+            <Button variant="outline" size="icon" onClick={handleLogout}>
+              <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
             </Button>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-2 sm:px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <TabsList className="grid w-full grid-cols-7 gap-2">
             <TabsTrigger value="overview" className="flex items-center gap-2">
-              <LayoutDashboard className="h-4 w-4" />
+              <LayoutDashboard className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">نظرة عامة</span>
             </TabsTrigger>
             <TabsTrigger value="news" className="flex items-center gap-2">
-              <Newspaper className="h-4 w-4" />
+              <Newspaper className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">الأخبار</span>
             </TabsTrigger>
             <TabsTrigger value="teachers" className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
+              <Users className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">المعلمين</span>
             </TabsTrigger>
             <TabsTrigger value="graduates" className="flex items-center gap-2">
-              <GraduationCap className="h-4 w-4" />
+              <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">الخريجين</span>
             </TabsTrigger>
             <TabsTrigger value="complaints" className="flex items-center gap-2">
-              <MessageSquare className="h-4 w-4" />
+              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">الشكاوي</span>
             </TabsTrigger>
             <TabsTrigger value="magazine" className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4" />
+              <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">المجلة</span>
             </TabsTrigger>
             <TabsTrigger value="stories" className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
+              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
               <span className="hidden md:inline">قصص النجاح</span>
             </TabsTrigger>
           </TabsList>
