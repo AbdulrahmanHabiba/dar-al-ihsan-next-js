@@ -64,4 +64,4 @@ yarn-error.log*
 next-env.d.ts
 
 # prisma
-/generated/prisma
+/prisma/generated/prisma
