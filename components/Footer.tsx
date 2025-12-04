@@ -103,7 +103,7 @@ const Footer = () => {
                 <span>info@dar-alihsan.com</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="h-4 w-4" />
+                <MapPin className="h-6 w-6" />
                 <span>مركز إدكو – محافظة البحيرة – شارع البحر – بجوار مسجد الشهداء</span>
               </li>
             </ul>

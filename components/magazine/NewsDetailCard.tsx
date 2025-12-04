@@ -125,11 +125,11 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
 
         {/* Description */}
         {news.description && (
-          <div className="prose prose-lg max-w-none text-muted-foreground">
-            <p className="whitespace-pre-wrap leading-relaxed">
-              {news.description}
-            </p>
-          </div>
+          <div
+            className="prose prose-lg max-w-none text-muted-foreground"
+            // محتوى الوصف قادم من محرر Tiptap لذلك هو HTML جاهز للعرض
+            dangerouslySetInnerHTML={{ __html: news.description }}
+          />
         )}
 
         {/* Divider */}

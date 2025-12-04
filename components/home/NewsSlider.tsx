@@ -128,9 +128,11 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
 
                       {/* Description */}
                       {item.description && (
-                        <p className="text-muted-foreground line-clamp-2">
-                          {item.description}
-                        </p>
+                        <div
+                          className="text-muted-foreground line-clamp-2 prose prose-sm max-w-none"
+                          // عرض وصف الخبر كـ HTML من محرر Tiptap
+                          dangerouslySetInnerHTML={{ __html: item.description }}
+                        />
                       )}
                     </CardContent>
                   </Card>
