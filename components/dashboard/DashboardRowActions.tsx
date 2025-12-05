@@ -13,7 +13,7 @@ interface DashboardRowActionsProps {
 
 export function DashboardRowActions({ actions }: DashboardRowActionsProps) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 text-right" dir="rtl">
       {actions.map((action, index) => (
         <Button
           key={index}

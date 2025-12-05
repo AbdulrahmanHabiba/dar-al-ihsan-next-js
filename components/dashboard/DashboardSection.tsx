@@ -19,7 +19,7 @@ export function DashboardSection({
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between flex-row-reverse gap-4">
           <div>
             <CardTitle>{title}</CardTitle>
             {description && (

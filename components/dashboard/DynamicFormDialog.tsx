@@ -77,7 +77,10 @@ const createDynamicSchema = (fields: FormFieldConfig[]) => {
       case 'url':
         fieldSchema = field.required
           ? z.string().url('رابط غير صالح').min(1, `${field.label} مطلوب`)
-          : z.string().url('رابط غير صالح').optional().or(z.literal(''));
+          : z.string().refine(
+              (val) => !val || val === '' || z.string().url().safeParse(val).success,
+              { message: 'رابط غير صالح' }
+            ).optional().or(z.literal(''));
         break;
       default:
         fieldSchema = field.required 
@@ -110,7 +113,33 @@ export const DynamicFormDialog = ({
     const defaults: Record<string, any> = {};
     fields.forEach((field) => {
       if (initialData && initialData[field.name] !== undefined) {
-        defaults[field.name] = initialData[field.name];
+        // Convert null values to empty string or appropriate default
+        const value = initialData[field.name];
+        if (value === null) {
+          switch (field.type) {
+            case 'switch':
+              defaults[field.name] = false;
+              break;
+            case 'images':
+              defaults[field.name] = [];
+              break;
+            case 'date':
+              // Default to today's date if null
+              defaults[field.name] = new Date().toISOString().split('T')[0];
+              break;
+            default:
+              defaults[field.name] = '';
+          }
+        } else {
+          // Handle date formatting for date inputs
+          if (field.type === 'date' && value) {
+            // Convert ISO date string to YYYY-MM-DD format for date input
+            const date = new Date(value);
+            defaults[field.name] = date.toISOString().split('T')[0];
+          } else {
+            defaults[field.name] = value;
+          }
+        }
       } else if (field.defaultValue !== undefined) {
         defaults[field.name] = field.defaultValue;
       } else {
@@ -120,6 +149,10 @@ export const DynamicFormDialog = ({
             break;
           case 'images':
             defaults[field.name] = [];
+            break;
+          case 'date':
+            // Default to today's date
+            defaults[field.name] = new Date().toISOString().split('T')[0];
             break;
           default:
             defaults[field.name] = '';
@@ -222,6 +255,7 @@ export const DynamicFormDialog = ({
                   placeholder={placeholder}
                   {...field}
                   className="min-h-[100px]"
+                  dir="rtl"
                 />
               ) : type === 'richtext' ? (
                 <RichTextEditor
@@ -243,6 +277,7 @@ export const DynamicFormDialog = ({
                 <Input
                   type="date"
                   {...field}
+                  value={field.value || ''}
                   dir="ltr"
                 />
               ) : type === 'url' ? (
@@ -250,12 +285,14 @@ export const DynamicFormDialog = ({
                   type="url"
                   placeholder={placeholder}
                   {...field}
+                  value={field.value || ''}
                   dir="ltr"
                 />
               ) : (
                 <Input
                   placeholder={placeholder}
                   {...field}
+                  value={field.value || ''}
                 />
               )}
             </FormControl>

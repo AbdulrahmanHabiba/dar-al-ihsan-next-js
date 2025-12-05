@@ -8,7 +8,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Edit, Trash2 } from "lucide-react";
 import { DynamicFormDialog, FormFieldConfig } from "./DynamicFormDialog";
-import { useNews, useCreateNews, useUpdateNews, useDeleteNews } from "@/hooks/useNews";
+import { useNews, useCreateNews, useDeleteNews } from "@/hooks/useNews";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiClient } from "@/lib/api/client";
 import type { News } from "@/types/news";
 
 const newsFields: FormFieldConfig[] = [
@@ -61,16 +63,37 @@ const newsFields: FormFieldConfig[] = [
     type: "switch",
     defaultValue: true,
   },
+  {
+    name: "createdAt",
+    label: "تاريخ النشر",
+    type: "date",
+    placeholder: "تاريخ النشر",
+  },
 ];
 
 export default function NewsManager() {
   const { data: news = [], isLoading } = useNews();
   const createNewsMutation = useCreateNews();
-  const updateNewsMutation = useUpdateNews(0); // سيتم استخدامه فقط عند وجود عنصر مُعدل
+  const queryClient = useQueryClient();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<News | null>(null);
+
+  // Update mutation that uses the editingItem id
+  const updateNewsMutation = useMutation({
+    mutationFn: (data: Partial<News>) => {
+      if (!editingItem) throw new Error("No item to update");
+      return apiClient<News>(`api/news/${editingItem.id}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["news", editingItem?.id] });
+      queryClient.invalidateQueries({ queryKey: ["news"] });
+    },
+  });
 
   const handleAdd = () => {
     setEditingItem(null);
@@ -102,6 +125,7 @@ export default function NewsManager() {
       link: formData.link || null,
       linkTitle: formData.linkTitle || null,
       published: formData.published ?? true,
+      createdAt: formData.createdAt ? new Date(formData.createdAt).toISOString() : undefined,
     };
 
     try {

@@ -52,9 +52,18 @@ interface NewsSliderProps {
 
 const NewsSlider = ({initialNews}:NewsSliderProps) => {
     const { data: news, isLoading } = useNews(initialNews);
+    
+    // Filter only published news
+    const publishedNews = news?.filter((item) => item.published === true) || [];
+    
     if (isLoading) {
       return <NewsSliderSkeleton />;
     }
+    
+    if (publishedNews.length === 0) {
+      return null;
+    }
+    
   return (
     <section className="py-20 bg-gradient-hero">
       <div className="container">
@@ -65,21 +74,24 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
           </p>
         </div>
 
-        <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-          className="w-full max-w-6xl mx-auto"
-        >
-          <CarouselContent>
-            {news.map((item) => (
+        <div className="relative w-full max-w-7xl mx-auto px-4 md:px-8">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: publishedNews.length > 3,
+              slidesToScroll: 1,
+              dragFree: false,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {publishedNews.map((item) => (
               <CarouselItem
                 key={item.id}
-                className="md:basis-1/2 lg:basis-1/3"
+                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
               >
                 <Link href="/magazine">
-                  <Card className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 h-full group">
+                  <Card className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 h-full group flex flex-col">
                     {/* Image */}
                     <div className="aspect-video overflow-hidden relative">
                       <Image
@@ -97,10 +109,10 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
                       </div>
                     </div>
 
-                    <CardContent className="p-6">
+                    <CardContent className="p-6 flex flex-col flex-grow">
                       {/* Publisher Badge */}
                       {item.publisher && (
-                        <Badge variant="secondary" className="mb-3">
+                        <Badge variant="secondary" className="mb-3 w-fit">
                           <User className="h-3 w-3 ml-1" />
                           {item.publisher}
                         </Badge>
@@ -108,7 +120,7 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
 
                       {/* Date */}
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                        <Calendar className="h-4 w-4" />
+                        <Calendar className="h-4 w-4 flex-shrink-0" />
                         <time dateTime={item.createdAt}>
                           {new Date(item.createdAt).toLocaleDateString(
                             "ar-EG",
@@ -122,15 +134,14 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl font-bold mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors min-h-[3.5rem]">
                         {item.title}
                       </h3>
 
                       {/* Description */}
                       {item.description && (
                         <div
-                          className="text-muted-foreground line-clamp-2 prose prose-sm max-w-none"
-                          // عرض وصف الخبر كـ HTML من محرر Tiptap
+                          className="text-muted-foreground line-clamp-3 prose prose-sm max-w-none flex-grow"
                           dangerouslySetInnerHTML={{ __html: item.description }}
                         />
                       )}
@@ -138,11 +149,16 @@ const NewsSlider = ({initialNews}:NewsSliderProps) => {
                   </Card>
                 </Link>
               </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="right-auto left-4" />
-          <CarouselNext className="left-auto right-4" />
-        </Carousel>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious 
+              className="hidden md:flex -left-12 lg:-left-16 h-10 w-10 border-2 bg-background/80 backdrop-blur-sm hover:bg-background" 
+            />
+            <CarouselNext 
+              className="hidden md:flex -right-12 lg:-right-16 h-10 w-10 border-2 bg-background/80 backdrop-blur-sm hover:bg-background" 
+            />
+          </Carousel>
+        </div>
 
         {/* View All Button */}
         <div className="text-center mt-8">
