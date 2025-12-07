@@ -8,6 +8,7 @@ import { useNews } from "@/hooks/useNews";
 export default function MagazinePage() {
   // Get all news
   const { data: allNews, isLoading: isLoadingAll } = useNews();
+  const publishedNews= allNews?.filter((news)=> news.published === true)
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -21,7 +22,7 @@ export default function MagazinePage() {
 
       {/* Tabs */}
       <Tabs defaultValue="news" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8">
+        <TabsList className="grid w-full grid-cols-4 mb-8 px-1 mx-1">
           <TabsTrigger value="news">آخر الأخبار</TabsTrigger>
           <TabsTrigger value="student">طالب الشهر</TabsTrigger>
           <TabsTrigger value="students">الطلاب المميزون</TabsTrigger>
@@ -32,9 +33,9 @@ export default function MagazinePage() {
         <TabsContent value="news">
           {isLoadingAll ? (
             <NewsGridSkeleton />
-          ) : allNews && allNews.length > 0 ? (
+          ) : publishedNews && publishedNews.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {allNews.map((item) => (
+              {publishedNews.map((item) => (
                 <NewsDetailCard key={item.id} news={item} />
               ))}
             </div>

@@ -270,7 +270,7 @@ export const DynamicFormDialog = ({
                     onCheckedChange={field.onChange}
                   />
                   <span className="text-sm text-muted-foreground">
-                    {field.value ? 'مفعل' : 'غير مفعل'}
+                    {field.value ? 'نشر' : 'حفظ بدون نشر' }
                   </span>
                 </div>
               ) : type === 'date' ? (

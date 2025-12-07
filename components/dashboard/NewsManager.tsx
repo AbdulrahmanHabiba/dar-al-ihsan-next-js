@@ -124,7 +124,7 @@ export default function NewsManager() {
       publisher: formData.publisher || null,
       link: formData.link || null,
       linkTitle: formData.linkTitle || null,
-      published: formData.published ?? true,
+      published: formData.published ?? false,
       createdAt: formData.createdAt ? new Date(formData.createdAt).toISOString() : undefined,
     };
 

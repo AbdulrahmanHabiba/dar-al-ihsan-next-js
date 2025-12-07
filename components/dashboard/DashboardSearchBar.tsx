@@ -22,11 +22,6 @@ export function DashboardSearchBar({
     onSearch?.(value);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
 
   return (
     <div className="flex items-center gap-2">
@@ -37,7 +32,7 @@ export function DashboardSearchBar({
           className="pr-10"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={handleKeyDown}
+          onKeyDown={()=>  handleSearch()}
         />
       </div>
       <Button variant="outline" type="button" onClick={handleSearch}>
