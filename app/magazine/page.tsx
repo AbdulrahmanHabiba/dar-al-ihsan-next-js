@@ -22,7 +22,7 @@ export default function MagazinePage() {
 
       {/* Tabs */}
       <Tabs defaultValue="news" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8 px-1 mx-1">
+        <TabsList className="grid w-full grid-cols-4 mb-8 px-1 mx-1 text-sm">
           <TabsTrigger value="news">آخر الأخبار</TabsTrigger>
           <TabsTrigger value="student">طالب الشهر</TabsTrigger>
           <TabsTrigger value="students">الطلاب المميزون</TabsTrigger>
