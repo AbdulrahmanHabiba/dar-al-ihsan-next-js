@@ -31,50 +31,53 @@ model News {
   updatedAt   DateTime  @updatedAt
 }
 
-model Magazine {
-  id          Int       @id @default(autoincrement())
-  category    String
-  month       String
+// model Magazine {
+//   id          Int       @id @default(autoincrement())
+//   category    String
+//   month       String
 
-  name        String
-  moreInfo    String?
-  achievement String?
-  image       String?
-  published   Boolean   @default(true)
-  createdAt   DateTime? @default(now())
-  updatedAt   DateTime  @updatedAt
-}
+//   name        String
+//   moreInfo    String?
+//   achievement String?
+//   image       String?
+//   published   Boolean   @default(true)
+//   createdAt   DateTime? @default(now())
+//   updatedAt   DateTime  @updatedAt
+// }
 
-model Students {
-  id          Int       @id @default(autoincrement())
-  name        String
-  age         Int
-  gender      String
-  phone       String?
+// model Students {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   moreInfo    String?
+//   age         Int
+//   gender      String
+//   phone       String?
 
+//   groups      Groups[] @relation("GroupStudents")
+//   achievement String?
+//   image       String?
+//   createdAt   DateTime  @default(now())
+//   updatedAt   DateTime  @updatedAt
+// }
 
-  group       String
-  teacher     String
-  achievement String?
-  image       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-}
+// model Teachers {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   specialty   String?
+//   phone       String?
+//   email       String?
+//   groups      Groups[] @relation("GroupTeachers")
+//   createdAt   DateTime  @default(now())
+//   updatedAt   DateTime  @updatedAt
+// }
 
-model Teachers {
-  id          Int       @id @default(autoincrement())
-  name        String
-  title       String
-  specialty   String
-  phone       String?
-  email       String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-}
-
-model Groups {
-  id          Int       @id @default(autoincrement())
-  name        String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-}
+// model Groups {
+//   id          Int       @id @default(autoincrement())
+//   name        String
+//   days        String[]
+//   time        String
+//   teachers    Teachers[] @relation("GroupTeachers")
+//   students    Students[] @relation("GroupStudents")
+//   createdAt   DateTime  @default(now())
+//   updatedAt   DateTime  @updatedAt
+// }

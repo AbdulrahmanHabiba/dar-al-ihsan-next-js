@@ -1,73 +1,229 @@
-# Welcome to your Lovable project
+# 🕌 دار الإحسان لتحفيظ وتجويد القرآن الكريم
 
-## Project info
+<div align="center">
 
-**URL**: https://lovable.dev/projects/68403729-0dbd-4022-9d43-b9b24195cbce
+![دار الإحسان](https://img.shields.io/badge/دار_الإحسان-تحفيظ_القرآن-green?style=for-the-badge&logo=book&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-15.5.7-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue?style=for-the-badge&logo=typescript&logoColor=white)
 
-## How can I edit this code?
+**منصة إلكترونية شاملة لإدارة دار الإحسان لتحفيظ وتجويد القرآن الكريم**  
+*تحت رعاية وإشراف الأزهر الشريف - ترخيص رقم 828 لسنة 2011*
 
-There are several ways of editing your application.
+[🚀 المميزات](#-المميزات) • [🛠️ التقنيات المستخدمة](#️-التقنيات-المستخدمة) • [📦 التثبيت](#-التثبيت) • [🚀 التشغيل](#-التشغيل)
 
-**Use Lovable**
+</div>
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/68403729-0dbd-4022-9d43-b9b24195cbce) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📋 نظرة عامة
 
-**Use your preferred IDE**
+دار الإحسان هي منصة إلكترونية متكاملة لإدارة معهد تحفيظ القرآن الكريم، توفر نظام إدارة شامل للأخبار، المعلمين، الخريجين، الشكاوي والاقتراحات، والمجلة الإلكترونية.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 🎯 الهدف من المشروع
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+تقديم حلول تقنية متقدمة لإدارة معهد تحفيظ القرآن الكريم بشكل احترافي، مع توفير واجهة مستخدم عصرية وسهلة الاستخدام للطلاب والمعلمين والإدارة.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## ✨ المميزات
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### 🏠 الصفحة الرئيسية
+- ✅ عرض إحصاءات المعهد (الطلاب، المعلمين، الخريجين)
+- ✅ سلايدر للأخبار والفعاليات
+- ✅ عرض المميزات والخدمات
+- ✅ تصميم متجاوب يعمل على جميع الأجهزة
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 📰 إدارة الأخبار
+- ✅ إضافة وتعديل وحذف الأخبار
+- ✅ محرر نص غني (Rich Text Editor) باستخدام Tiptap
+- ✅ دعم الصور المتعددة وروابط الفيديو
+- ✅ نظام نشر/مسودة للأخبار
+- ✅ عرض الأخبار المنشورة فقط للزوار
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### 👨‍🏫 إدارة المعلمين
+- ✅ إضافة وتعديل معلومات المعلمين
+- ✅ عرض قائمة المعلمين مع البحث والفلترة
+
+### 🎓 إدارة الخريجين
+- ✅ إدارة بيانات الخريجين
+- ✅ عرض قصص النجاح والإنجازات
+
+### 📝 إدارة الشكاوي والاقتراحات
+- ✅ استقبال ومعالجة الشكاوي والاقتراحات
+- ✅ نظام متابعة للحالات
+
+### 📚 المجلة الإلكترونية
+- ✅ عرض الأخبار والفعاليات
+- ✅ عرض طالب الشهر والمعلم المميز
+- ✅ عرض الطلاب المتفوقين
+
+### 🎵 قارئ القرآن الكريم
+- ✅ مشغل صوتي للقرآن الكريم
+- ✅ واجهة سهلة الاستخدام
+
+### 📊 لوحة التحكم
+- ✅ لوحة تحكم شاملة للإدارة
+- ✅ إحصائيات تفصيلية
+- ✅ إدارة جميع المحتويات من مكان واحد
+
+---
+
+## 🛠️ التقنيات المستخدمة
+
+### ⚡ Frontend
+- **[Next.js 15.5.7](https://nextjs.org/)** - إطار عمل React للإنتاج
+- **[React 18.3.1](https://react.dev/)** - مكتبة JavaScript لبناء واجهات المستخدم
+- **[TypeScript 5.8.3](https://www.typescriptlang.org/)** - لغة برمجة مكتوبة بشكل آمن
+- **[Tailwind CSS 3.4.17](https://tailwindcss.com/)** - إطار عمل CSS utility-first
+- **[shadcn/ui](https://ui.shadcn.com/)** - مكونات واجهة المستخدم عالية الجودة
+- **[Radix UI](https://www.radix-ui.com/)** - مكونات UI غير مقيدة بالتصميم
+- **[Lucide React](https://lucide.dev/)** - مكتبة الأيقونات
+
+### 🎨 UI Components & Libraries
+- **[Tiptap](https://tiptap.dev/)** - محرر نص غني
+- **[Embla Carousel](https://www.embla-carousel.com/)** - سلايدر متقدم
+- **[React Hook Form](https://react-hook-form.com/)** - إدارة النماذج
+- **[Zod](https://zod.dev/)** - التحقق من صحة البيانات
+- **[TanStack Query](https://tanstack.com/query)** - إدارة حالة الخادم
+
+### 🗄️ Backend & Database
+- **[Prisma 7.0.1](https://www.prisma.io/)** - ORM حديث للتعامل مع قواعد البيانات
+- **[PostgreSQL](https://www.postgresql.org/)** - قاعدة بيانات علائقية قوية
+- **[Next.js API Routes](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)** - واجهات برمجة التطبيقات
+
+### 🔧 Development Tools
+- **[ESLint 9.32.0](https://eslint.org/)** - أداة فحص الكود
+- **[TypeScript](https://www.typescriptlang.org/)** - فحص الأنواع
+- **[PostCSS](https://postcss.org/)** - معالج CSS
+
+---
+
+## 📦 التثبيت
+
+### المتطلبات الأساسية
+
+- **Node.js** 18.x أو أحدث
+- **pnpm** (أو npm/yarn)
+- **PostgreSQL** قاعدة بيانات
+
+### خطوات التثبيت
+
+```bash
+# 1. استنساخ المستودع
+git clone <repository-url>
+cd dar-al-ihsan-quran-main
+
+# 2. تثبيت التبعيات
+pnpm install
+
+# 3. إعداد متغيرات البيئة
+# أنشئ ملف .env.local وأضف المتغيرات التالية:
+# DATABASE_URL="postgresql://user:password@localhost:5432/database_name"
+# NEXT_PUBLIC_API_URL="http://localhost:3000"
+
+# 4. إعداد قاعدة البيانات
+pnpm prisma migrate dev
+
+# 5. توليد Prisma Client
+pnpm prisma generate
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🚀 التشغيل
 
-**Use GitHub Codespaces**
+### وضع التطوير
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+# تشغيل خادم التطوير
+pnpm dev
+```
 
-## What technologies are used for this project?
+افتح [http://localhost:3000](http://localhost:3000) في المتصفح.
 
-This project is built with:
+### بناء الإنتاج
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+# بناء المشروع للإنتاج
+pnpm build
 
-## How can I deploy this project?
+# تشغيل خادم الإنتاج
+pnpm start
+```
 
-Simply open [Lovable](https://lovable.dev/projects/68403729-0dbd-4022-9d43-b9b24195cbce) and click on Share -> Publish.
+### أوامر إضافية
 
-## Can I connect a custom domain to my Lovable project?
+```bash
+# فحص الكود
+pnpm lint
 
-Yes, you can!
+# توليد Prisma Client
+pnpm prisma generate
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+# فتح Prisma Studio (واجهة قاعدة البيانات)
+pnpm prisma studio
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## 📁 هيكل المشروع
+
+```
+dar-al-ihsan-quran-main/
+├── app/                    # صفحات Next.js (App Router)
+│   ├── dashboard/          # لوحة التحكم
+│   ├── magazine/           # صفحة المجلة
+│   ├── quran/             # قارئ القرآن
+│   └── ...
+├── components/             # مكونات React
+│   ├── dashboard/         # مكونات لوحة التحكم
+│   ├── ui/                # مكونات واجهة المستخدم
+│   └── ...
+├── hooks/                  # React Hooks مخصصة
+├── lib/                    # مكتبات مساعدة
+├── prisma/                 # مخطط قاعدة البيانات
+├── public/                 # الملفات الثابتة
+├── services/               # خدمات Backend
+└── types/                  # تعريفات TypeScript
+```
+
+---
+
+## 🔐 الأمان
+
+- ✅ التحقق من صحة البيانات باستخدام Zod
+- ✅ حماية API Routes
+- ✅ إدارة الجلسات والمصادقة
+- ✅ حماية من SQL Injection (Prisma ORM)
+- ✅ تحديثات أمنية مستمرة
+
+---
+
+## 📝 الترخيص
+
+هذا المشروع خاص بدار الإحسان لتحفيظ وتجويد القرآن الكريم.
+
+**تحت رعاية وإشراف الأزهر الشريف**  
+*ترخيص رقم 828 لسنة 2011*
+
+---
+
+## 👥 المساهمون
+
+- فريق تطوير دار الإحسان
+
+---
+
+## 📞 التواصل
+
+للاستفسارات والدعم الفني، يرجى التواصل مع فريق التطوير.
+
+---
+
+<div align="center">
+
+**صُنع بـ ❤️ لخدمة القرآن الكريم**
+
+[⬆ العودة للأعلى](#-دار-الإحسان-لتحفيظ-وتجويد-القرآن-الكريم)
+
+</div>
