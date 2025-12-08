@@ -23,6 +23,7 @@ import {
     List,
     Loader2,
 } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Radio {
     id: number;
@@ -47,6 +48,9 @@ export const QuranPlayer = () => {
     const [isMuted, setIsMuted] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [open, setOpen] = useState(false);
+
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         fetchRadios();
@@ -161,7 +165,7 @@ export const QuranPlayer = () => {
             <div className="container mx-auto px-4 py-3">
                 <div className="flex items-center justify-between gap-4">
                     {/* LEFT: Avatar + info */}
-                    <div className="min-w-0 flex items-center gap-4">
+                    <div className="min-w-0 flex items-center gap-4 cursor-pointer" onClick={() => isMobile ? setOpen(true) : null}>
                         <Avatar className="sm:h-12 sm:w-12 h-10 w-10 shrink-0">
                             <AvatarImage src={currentRadio.img} alt={currentRadio.name} />
                             <AvatarFallback>{currentRadio.name[0]}</AvatarFallback>
@@ -249,12 +253,13 @@ export const QuranPlayer = () => {
                             />
                         </div>
 
-                        <Sheet>
-                            <SheetTrigger asChild>
+                        <Sheet open={open} onOpenChange={setOpen}>
+                          {!isMobile && <SheetTrigger asChild>
                                 <Button variant="outline" size="icon">
-                                    <List className="h-3 w-3 sm:h-4 sm:w-4" />
-                                </Button>
-                            </SheetTrigger>
+                                        <List className="h-3 w-3 sm:h-4 sm:w-4" />
+                                    </Button>
+                                </SheetTrigger>
+                            }
                             <SheetContent side="bottom" className="h-[80vh]">
                                 <SheetHeader>
                                     <SheetTitle>قائمة القراء</SheetTitle>
