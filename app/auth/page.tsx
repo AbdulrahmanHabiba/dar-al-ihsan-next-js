@@ -45,10 +45,10 @@ const Auth = () => {
                     variant: "destructive",
                 });
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             toast({
                 title: "خطأ",
-                description: error.message || "حدث خطأ ما",
+                description: error instanceof Error ? error.message : "حدث خطأ ما",
                 variant: "destructive",
             });
         } finally {
@@ -64,10 +64,10 @@ const Auth = () => {
                 title: "قريباً",
                 description: "سيتم إضافة تسجيل الدخول بجوجل قريباً",
             });
-        } catch (error: any) {
+        } catch (error: unknown) {
             toast({
                 title: "خطأ",
-                description: error.message,
+                description: error instanceof Error ? error.message : "حدث خطأ ما",
                 variant: "destructive",
             });
         } finally {

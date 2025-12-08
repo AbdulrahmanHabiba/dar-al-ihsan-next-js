@@ -2,13 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiError } from "./error";
 
 
-export function handleApi(handler: Function){
-    return async (req: NextRequest, ctx: any) => {
+type ApiHandler = (req: NextRequest, ctx: { params: Promise<Record<string, string>> }) => Promise<unknown>;
+
+export function handleApi(handler: ApiHandler){
+    return async (req: NextRequest, ctx: { params: Promise<Record<string, string>> }) => {
         try{
             const data = await handler(req, ctx);
             return NextResponse.json({data})
         }
-        catch(error: any){
+        catch(error: unknown){
             if(error instanceof ApiError){
                 return NextResponse.json(
                     {error: error.message ,code: error.code},

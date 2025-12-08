@@ -124,7 +124,7 @@ const Location = () => {
                   <h3 className="font-semibold text-foreground mb-2">المواصلات العامة (التاكسي):</h3>
                   <p className="mr-4">
                     اركب لشارع البحر، وانزل بعد مسجد الشهداء بحوالي 200–300 متر،
-                    واسأل عن "دار الإحسان".
+                    واسأل عن &ldquo;دار الإحسان&rdquo;.
                   </p>
                 </div>
               </div>
