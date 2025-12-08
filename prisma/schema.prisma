@@ -30,3 +30,51 @@ model News {
   createdAt   DateTime? @default(now())
   updatedAt   DateTime  @updatedAt
 }
+
+model Magazine {
+  id          Int       @id @default(autoincrement())
+  category    String
+  month       String
+
+  name        String
+  moreInfo    String?
+  achievement String?
+  image       String?
+  published   Boolean   @default(true)
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Students {
+  id          Int       @id @default(autoincrement())
+  name        String
+  age         Int
+  gender      String
+  phone       String?
+
+
+  group       String
+  teacher     String
+  achievement String?
+  image       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Teachers {
+  id          Int       @id @default(autoincrement())
+  name        String
+  title       String
+  specialty   String
+  phone       String?
+  email       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Groups {
+  id          Int       @id @default(autoincrement())
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
