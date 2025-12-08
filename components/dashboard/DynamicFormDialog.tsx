@@ -42,7 +42,7 @@ export interface FormFieldConfig {
   type: FieldType;
   placeholder?: string;
   required?: boolean;
-  defaultValue?: unknown;
+  defaultValue?: any;
 }
 
 interface DynamicFormDialogProps {
@@ -50,8 +50,8 @@ interface DynamicFormDialogProps {
   onOpenChange: (open: boolean) => void;
   title: string;
   fields: FormFieldConfig[];
-  initialData?: Record<string, unknown>;
-  onSubmit: (data: Record<string, unknown>) => void;
+  initialData?: Record<string, any>;
+  onSubmit: (data: Record<string, any>) => void;
   isLoading?: boolean;
   mode: 'add' | 'edit';
 }
@@ -110,7 +110,7 @@ export const DynamicFormDialog = ({
   const schema = createDynamicSchema(fields);
   
   const getDefaultValues = () => {
-    const defaults: Record<string, unknown> = {};
+    const defaults: Record<string, any> = {};
     fields.forEach((field) => {
       if (initialData && initialData[field.name] !== undefined) {
         // Convert null values to empty string or appropriate default
@@ -179,10 +179,9 @@ export const DynamicFormDialog = ({
         setImageInputs(['']);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, initialData]);
 
-  const handleSubmit = (data: Record<string, unknown>) => {
+  const handleSubmit = (data: Record<string, any>) => {
     const imagesField = fields.find(f => f.type === 'images');
     if (imagesField) {
       data[imagesField.name] = imageInputs.filter(img => img.trim() !== '');

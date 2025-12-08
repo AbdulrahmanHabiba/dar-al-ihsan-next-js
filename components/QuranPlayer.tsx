@@ -117,8 +117,8 @@ export const QuranPlayer = () => {
                 setIsPlaying(true);
                 setIsLoading(false);
             }
-        } catch (error: unknown) {
-            setError(error instanceof Error ? error.message : "حدث خطأ أثناء تشغيل الصوت، اختر إذاعة أخرى");
+        } catch (error: any) {
+            setError(error.message || "حدث خطأ أثناء تشغيل الصوت، اختر إذاعة أخرى");
             setIsPlaying(false);
             setIsLoading(false);
         }
@@ -126,7 +126,6 @@ export const QuranPlayer = () => {
 
     useEffect(() => {
         togglePlay();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const changeRadio = (radio: Radio) => {

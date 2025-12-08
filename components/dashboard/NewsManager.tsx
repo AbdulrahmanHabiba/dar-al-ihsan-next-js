@@ -1,4 +1,4 @@
-"use client";
+`use client`;
 
 import { useMemo, useState } from "react";
 import { DashboardSection } from "./DashboardSection";
@@ -115,7 +115,7 @@ export default function NewsManager() {
     );
   }, [news, searchQuery]);
 
-  const handleSubmit = async (formData: Record<string, unknown>) => {
+  const handleSubmit = async (formData: Record<string, any>) => {
     const payload: Partial<News> = {
       title: formData.title,
       description: formData.description ?? null,
