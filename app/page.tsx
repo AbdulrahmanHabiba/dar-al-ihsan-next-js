@@ -145,6 +145,16 @@ const HomePage = async () => {
       {/* News Slider */}
       <NewsSlider />
 
+      {/* <iframe
+  src="https://quran.ksu.edu.sa/index.php?l=ar"
+  style={{
+    minWidth: '1000px',
+    width: '100%',
+    height: '890px',
+    border: 'none',
+    overflow: 'hidden',
+  }}
+/> */}
       {/* CTA Section */}
       <section className="py-20 bg-gradient-primary text-primary-foreground">
         <div className="container text-center">

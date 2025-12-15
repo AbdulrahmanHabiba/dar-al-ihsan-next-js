@@ -1,6 +1,6 @@
-import { DashboardSection } from "./DashboardSection";
-import { DashboardSearchBar } from "./DashboardSearchBar";
-import { DashboardRowActions } from "./DashboardRowActions";
+import { DashboardSection } from "./layout/DashboardSection";
+import { DashboardSearchBar } from "./layout/DashboardSearchBar";
+import { DashboardRowActions } from "./layout/DashboardRowActions";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Eye, CheckCircle, XCircle } from "lucide-react";

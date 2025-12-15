@@ -28,56 +28,97 @@ model News {
   linkTitle   String?   @default(" انقر هنا👆")
 
   createdAt   DateTime? @default(now())
-  updatedAt   DateTime  @updatedAt
+  updatedAt   DateTime? @updatedAt
 }
 
-// model Magazine {
-//   id          Int       @id @default(autoincrement())
-//   category    String
-//   month       String
+model Magazine {
+  id          Int       @id @default(autoincrement())
+  category    String
+  month       String
 
-//   name        String
-//   moreInfo    String?
-//   achievement String?
-//   image       String?
-//   published   Boolean   @default(true)
-//   createdAt   DateTime? @default(now())
-//   updatedAt   DateTime  @updatedAt
-// }
+  name        String
+  moreInfo    String?
+  achievement String?
+  image       String?
+  published   Boolean   @default(true)
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @updatedAt
+}
 
-// model Students {
-//   id          Int       @id @default(autoincrement())
-//   name        String
-//   moreInfo    String?
-//   age         Int
-//   gender      String
-//   phone       String?
+enum GroupDays {
+  MON_THU  // اتنين-خميس
+  SAT_TUE  // سبت-تلات
+  SUN_WED  // حد-اربع
+}
 
-//   groups      Groups[] @relation("GroupStudents")
-//   achievement String?
-//   image       String?
-//   createdAt   DateTime  @default(now())
-//   updatedAt   DateTime  @updatedAt
-// }
+enum Gender {
+  MALE    // ذكر
+  FEMALE  // أنثى
+}
 
-// model Teachers {
-//   id          Int       @id @default(autoincrement())
-//   name        String
-//   specialty   String?
-//   phone       String?
-//   email       String?
-//   groups      Groups[] @relation("GroupTeachers")
-//   createdAt   DateTime  @default(now())
-//   updatedAt   DateTime  @updatedAt
-// }
+enum GroupTime {
+    Clock_12_00   // 12:00
+    Clock_12_30   // 12:30
+    Clock_01_00   // 01:00
+    Clock_01_30   // 01:30
+    Clock_02_00   // 02:00
+    Clock_02_30   // 02:30
+    Clock_03_00   // 03:00
+    Clock_03_30   // 03:30
+    Clock_04_00   // 04:00
+    Clock_04_30   // 04:30
+    Clock_05_00   // 05:00
+    Clock_05_30   // 05:30
+    Clock_06_00   // 06:00
+}
 
-// model Groups {
-//   id          Int       @id @default(autoincrement())
-//   name        String
-//   days        String[]
-//   time        String
-//   teachers    Teachers[] @relation("GroupTeachers")
-//   students    Students[] @relation("GroupStudents")
-//   createdAt   DateTime  @default(now())
-//   updatedAt   DateTime  @updatedAt
-// }
+// الطالب
+model Student {
+  id          Int       @id @default(autoincrement())
+  name        String
+  gender      Gender?
+  age         Int?
+  phone       String?
+  moreInfo    String?
+  achievement String?
+  image       String?
+
+  teacherId   Int?
+  teacher     Teacher?  @relation(fields: [teacherId],references: [id], onDelete: SetNull)
+  
+  groupId     Int?
+  group       Group?    @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+}
+
+// المعلم
+model Teacher {
+  id        Int      @id @default(autoincrement())
+  name      String
+  gender    Gender?
+  phone     String?
+  specialty String?
+  email     String?
+  groups    Group[]  // معلم واحد له مجموعات كتير (One-to-Many)
+  students  Student[] // معلم واحد له طلاب كتير (One-to-Many)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+// المجموعة
+model Group {
+  id        Int       @id @default(autoincrement())
+  name      GroupDays
+  time      GroupTime?
+  moreInfo  String?
+  
+  teacherId Int?
+  teacher   Teacher?  @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  
+  students  Student[] // مجموعة واحدة فيها طلاب كتير (One-to-Many)
+  
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}

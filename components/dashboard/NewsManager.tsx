@@ -1,13 +1,13 @@
 `use client`;
 
 import { useMemo, useState } from "react";
-import { DashboardSection } from "./DashboardSection";
-import { DashboardSearchBar } from "./DashboardSearchBar";
-import { DashboardRowActions } from "./DashboardRowActions";
+import { DashboardSection } from "./layout/DashboardSection";
+import { DashboardSearchBar } from "./layout/DashboardSearchBar";
+import { DashboardRowActions } from "./layout/DashboardRowActions";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Edit, Trash2 } from "lucide-react";
-import { DynamicFormDialog, FormFieldConfig } from "./DynamicFormDialog";
+import { DynamicFormDialog, FormFieldConfig } from "./layout/DynamicFormDialog";
 import { useNews, useCreateNews, useDeleteNews } from "@/hooks/useNews";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api/client";

@@ -5,8 +5,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Search, Edit, Trash2, Award } from "lucide-react";
-import { DashboardSearchBar } from "./DashboardSearchBar";
-import { DashboardRowActions } from "./DashboardRowActions";
+import { DashboardSearchBar } from "./layout/DashboardSearchBar";
+import { DashboardRowActions } from "./layout/DashboardRowActions";
 import { graduatesData } from "@/lib/dashboard/mockData";
 
 export default function GraduatesManager() {

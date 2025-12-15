@@ -14,7 +14,7 @@ export interface News {
     createdAt?: Date;
 }
 
-export async function getAllNews() {
+async function getAllNews() {
   try {
     const news = await prisma.news.findMany({
       orderBy: { createdAt: "desc" },
@@ -25,10 +25,11 @@ export async function getAllNews() {
   }
 }
 
-export async function getNewsById(id: number) {
+async function getNewsById(id: number) {
   if (!id || isNaN(id) || id <= 0) {
     throw ApiError.badRequest("Invalid news id");
   }
+
   try {
     const news = await prisma.news.findUnique({
       where: { id },
@@ -46,7 +47,7 @@ export async function getNewsById(id: number) {
   }
 }
 
-export async function createNews(news: News){
+async function createNews(news: News){
     if (!news.title) {
         throw ApiError.badRequest("Title is required");
     }
@@ -61,7 +62,7 @@ export async function createNews(news: News){
     }
 }
 
-export async function updateNews(id: number, news: Partial<News>){
+async function updateNews(id: number, news: Partial<News>){
     if (!id || isNaN(id) || id <= 0) {
         throw ApiError.badRequest("Invalid news id");
     }
@@ -81,7 +82,7 @@ export async function updateNews(id: number, news: Partial<News>){
     }
 }
 
-export async function deleteNews(id: number){
+async function deleteNews(id: number){
     if (!id || isNaN(id) || id <= 0) {
         throw ApiError.badRequest("Invalid news id");
     }
@@ -100,7 +101,7 @@ export async function deleteNews(id: number){
     }
 }
 
-export async function incrementNewsLikes(id: number, delta: number) {
+async function incrementNewsLikes(id: number, delta: number) {
   if (!id || isNaN(id) || id <= 0) {
     throw ApiError.badRequest("Invalid news id");
   }
@@ -145,4 +146,7 @@ export async function incrementNewsLikes(id: number, delta: number) {
     }
     throw ApiError.internal("Failed to update likes");
   }
+}
+
+export {getAllNews, getNewsById, createNews, updateNews, deleteNews, incrementNewsLikes
 }

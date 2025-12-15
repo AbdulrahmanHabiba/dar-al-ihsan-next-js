@@ -13,9 +13,10 @@ import {
   MessageSquare, 
   BookOpen,
   TrendingUp,
-  LogOut
+  LogOut,
+  CircleUserRound
 } from "lucide-react";
-import DashboardStats from "@/components/dashboard/DashboardStats";
+import DashboardStats from "@/components/dashboard/layout/DashboardStats";
 import NewsManager from "@/components/dashboard/NewsManager";
 import TeachersManager from "@/components/dashboard/TeachersManager";
 import GraduatesManager from "@/components/dashboard/GraduatesManager";
@@ -23,6 +24,7 @@ import ComplaintsManager from "@/components/dashboard/ComplaintsManager";
 import MagazineManager from "@/components/dashboard/MagazineManager";
 import SuccessStoriesManager from "@/components/dashboard/SuccessStoriesManager";
 import { logout } from "@/lib/auth";
+import StudentsManager from "@/components/dashboard/StudentsManager";
 
 const Dashboard = () => {
   const router = useRouter();
@@ -48,7 +50,7 @@ const Dashboard = () => {
               <p className="text-sm text-muted-foreground">admin@dar.com</p>
             </div>
             <Button variant="outline" size="icon" onClick={handleLogout}>
-              <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -56,33 +58,37 @@ const Dashboard = () => {
 
       <div className="container mx-auto px-2 sm:px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7 gap-2">
+          <TabsList className="grid w-full grid-cols-8 gap-2">
             <TabsTrigger value="overview" className="flex items-center gap-2">
-              <LayoutDashboard className="h-3 w-3 sm:h-4 sm:w-4" />
+              <LayoutDashboard className="h-4 w-4" />
               <span className="hidden md:inline">نظرة عامة</span>
             </TabsTrigger>
             <TabsTrigger value="news" className="flex items-center gap-2">
-              <Newspaper className="h-3 w-3 sm:h-4 sm:w-4" />
+              <Newspaper className="h-4 w-4" />
               <span className="hidden md:inline">الأخبار</span>
             </TabsTrigger>
+            <TabsTrigger value="students" className="flex items-center gap-2">
+              <CircleUserRound  className="h-4 w-4" />
+              <span className="hidden md:inline">الطلاب</span>
+            </TabsTrigger>
             <TabsTrigger value="teachers" className="flex items-center gap-2">
-              <Users className="h-3 w-3 sm:h-4 sm:w-4" />
+              <Users className="h-4 w-4" />
               <span className="hidden md:inline">المعلمين</span>
             </TabsTrigger>
             <TabsTrigger value="graduates" className="flex items-center gap-2">
-              <GraduationCap className="h-3 w-3 sm:h-4 sm:w-4" />
+              <GraduationCap className="h-4 w-4" />
               <span className="hidden md:inline">الخريجين</span>
             </TabsTrigger>
             <TabsTrigger value="complaints" className="flex items-center gap-2">
-              <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
+              <MessageSquare className="h-4 w-4" />
               <span className="hidden md:inline">الشكاوي</span>
             </TabsTrigger>
             <TabsTrigger value="magazine" className="flex items-center gap-2">
-              <BookOpen className="h-3 w-3 sm:h-4 sm:w-4" />
+              <BookOpen className="h-4 w-4" />
               <span className="hidden md:inline">المجلة</span>
             </TabsTrigger>
             <TabsTrigger value="stories" className="flex items-center gap-2">
-              <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+              <TrendingUp className="h-4 w-4" />
               <span className="hidden md:inline">قصص النجاح</span>
             </TabsTrigger>
           </TabsList>
@@ -94,6 +100,12 @@ const Dashboard = () => {
           <TabsContent value="news">
             <NewsManager />
           </TabsContent>
+
+          <TabsContent value="students">
+            <StudentsManager />
+          </TabsContent>
+
+
 
           <TabsContent value="teachers">
             <TeachersManager />
