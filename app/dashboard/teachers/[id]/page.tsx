@@ -130,7 +130,7 @@ export default function TeacherDetailsPage() {
                         />
                         <InfoCard icon={Mail} label="البريد الإلكتروني" value={teacher.email || "-"} />
                         <InfoCard icon={Book} label="التخصص" value={teacher.specialty || "-"} />
-                        <InfoCard icon={Calendar} label="تاريخ الانضمام" value={new Date(teacher.createdAt as any).toLocaleDateString("ar-EG")} />
+                        {/* <InfoCard icon={Calendar} label="تاريخ الانضمام" value={new Date(teacher.createdAt as any).toLocaleDateString("ar-EG")} /> */}
                     </div>
                 </div>
             </DashboardSectionCard>

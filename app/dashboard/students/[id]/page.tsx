@@ -160,7 +160,7 @@ export default function StudentDetailsPage() {
                         <InfoCard icon={Users} label="المعلم" value={student.teacher?.name || "غير محدد"} />
                         <InfoCard icon={Book} label="المجموعة" value={groupDaysMap[student.group?.name || ""] || "غير محدد"} />
                         <InfoCard icon={Clock} label="الموعد" value={groupTimeMap[student.group?.time || ""] || "-"} />
-                        <InfoCard icon={Calendar} label="تاريخ التسجيل" value={new Date(student.createdAt).toLocaleDateString("ar-EG")} />
+                        {/* <InfoCard icon={Calendar} label="تاريخ التسجيل" value={new Date(student.createdAt).toLocaleDateString("ar-EG")} /> */}
                     </div>
                 </div>
             </DashboardSectionCard>
