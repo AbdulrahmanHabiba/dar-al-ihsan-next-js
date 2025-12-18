@@ -1,5 +1,5 @@
 
-import { apiClient } from "@/lib/api/client";
+import { apiClient } from "@/lib//api/client";
 import { News } from "@/types/news";
 import { useMutation, useQuery, useQueryClient, QueryClient } from '@tanstack/react-query';
 
@@ -7,7 +7,7 @@ import { useMutation, useQuery, useQueryClient, QueryClient } from '@tanstack/re
 const useNews = (initialData?: News[]) => {
     return useQuery({
     queryKey: ["news"],
-    queryFn: () => apiClient<News[]>("api/news"),
+    queryFn: () => apiClient<News[]>("/api/news"),
     initialData,
     staleTime: 1000 * 60 * 60 * 1, // 1 hour
     refetchOnWindowFocus: false
@@ -18,7 +18,7 @@ const useNews = (initialData?: News[]) => {
 const useNewsById = (id: number, initialData?: News) => {
     return useQuery({
         queryKey: ["news", id],
-        queryFn: () => apiClient<News>(`api/news/${id}`),
+        queryFn: () => apiClient<News>(`/api/news/${id}`),
         initialData,
         enabled: !!id,
     })
@@ -28,7 +28,7 @@ const useNewsById = (id: number, initialData?: News) => {
 const useUpdateLikes = (newsId: number) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (delta: number) => apiClient<News>(`api/news/${newsId}/likes`, {
+        mutationFn: (delta: number) => apiClient<News>(`/api/news/${newsId}/likes`, {
             method: "POST",
             body: JSON.stringify({ delta }),
         }),
@@ -87,7 +87,7 @@ const useUpdateLikes = (newsId: number) => {
  const useCreateNews = () => {
     const QueryClient = useQueryClient();
      return useMutation({
-        mutationFn: (data: Partial<News>)=> apiClient<News>("api/news" ,{
+        mutationFn: (data: Partial<News>)=> apiClient<News>("/api/news" ,{
             method: "POST",
             body: JSON.stringify(data),
         }),
@@ -103,7 +103,7 @@ const useUpdateLikes = (newsId: number) => {
 const useUpdateNews = (id: number) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn:(data: Partial<News>)=> apiClient(`api/news/${id}` ,{
+        mutationFn:(data: Partial<News>)=> apiClient(`/api/news/${id}` ,{
             method: "PUT",
             body: JSON.stringify(data)
         })
@@ -118,7 +118,7 @@ const useUpdateNews = (id: number) => {
 const useDeleteNews = (id: number) => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: ()=> apiClient(`api/news/${id}`, {
+        mutationFn: ()=> apiClient(`/api/news/${id}`, {
             method: "DELETE"})
         ,onSuccess: ()=>{
             queryClient.invalidateQueries({ queryKey: ["news"] });

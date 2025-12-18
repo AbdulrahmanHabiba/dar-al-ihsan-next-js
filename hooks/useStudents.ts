@@ -1,4 +1,4 @@
-import { apiClient } from "@/lib/api/client";
+import { apiClient } from "@/lib//api/client";
 import { CreateStudentInput } from "@/services/students.service";
 import { Student } from "@/types/student";
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
@@ -6,7 +6,7 @@ import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 const useStudents = () => {
     return useQuery({
         queryKey: ["students"],
-        queryFn: () => apiClient<Student[]>("api/students"),
+        queryFn: () => apiClient<Student[]>("/api/students"),
         staleTime:  1000 * 60 * 60 * 24, // 24 hours
         refetchOnWindowFocus: false,
 
@@ -16,7 +16,7 @@ const useStudents = () => {
 const useNewsById = (id: number)=>{
     return useQuery({
         queryKey: ["news", id],
-        queryFn: () => apiClient<Student>(`api/students/${id}`),
+        queryFn: () => apiClient<Student>(`/api/students/${id}`),
         staleTime:  1000 * 60 * 60 * 24, // 24 hours
         enabled: !!id,
 
@@ -26,7 +26,7 @@ const useNewsById = (id: number)=>{
 const useCreateStudent = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (student: Partial<Student>)=> apiClient<Student>("api/students", {
+        mutationFn: (student: Partial<Student>)=> apiClient<Student>("/api/students", {
             method: "POST",
             body: JSON.stringify(student),
         }),
@@ -39,7 +39,7 @@ const useCreateStudent = () => {
 const useCreateManyStudents = () => {
     const queryClient = useQueryClient();  
     return useMutation({
-        mutationFn: (students: Partial<Student>[])=> apiClient<Student[]>("api/students/batch", {
+        mutationFn: (students: Partial<Student>[])=> apiClient<{count:number;students:Student[]}>("/api/students/batch", {
             method: "POST",
             body: JSON.stringify({ students }),
         }),
@@ -52,7 +52,7 @@ const useCreateManyStudents = () => {
 const useUpdateStudent = (id: number) => {
     const queryClient = useQueryClient();  
     return useMutation({
-        mutationFn: (student: Partial<Student>)=> apiClient<Student>(`api/students${id}`, {
+        mutationFn: (student: Partial<Student>)=> apiClient<Student>(`/api/students/${id}`, {
             method: "PUT",
             body: JSON.stringify(student),
         }), 
@@ -63,18 +63,17 @@ const useUpdateStudent = (id: number) => {
     })
 }
 
-const useDeleteStudent = (id: number) => {
+const useDeleteStudent = () => {
     const queryClient = useQueryClient();   
     return useMutation({
-        mutationFn: ()=> apiClient<Student>(`api/students${id}`, {
+        mutationFn: (id: number)=> apiClient<Student>(`/api/students/${id}`, {
             method: "DELETE",
         }), 
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["students"] });
-
         }
     })
 }
 
-export { useStudents, useCreateStudent, useNewsById };
+export { useStudents, useCreateStudent, useNewsById, useUpdateStudent, useDeleteStudent, useCreateManyStudents };
 

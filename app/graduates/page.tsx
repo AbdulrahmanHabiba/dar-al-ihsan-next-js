@@ -1,90 +1,21 @@
+"use client";
 
+import { useGraduates } from "@/hooks/useGraduates";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Award, Trophy, Star } from "lucide-react";
+import { Award, Trophy, Star, GraduationCap } from "lucide-react";
 import Image from "next/image";
 
 const Graduates = () => {
-  const graduates = [
-    {
-      name: "محمد عبد الله",
-      year: "2023",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "مع إجازة في رواية حفص",
-      image: "https://plus.unsplash.com/premium_photo-1677013623482-6d71ca2dc71a?q=80&w=870&auto=format&fit=crop"
-    },
-    {
-      name: "فاطمة أحمد",
-      year: "2023",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "الأولى على الدفعة",
-      image: "https://plus.unsplash.com/premium_photo-1677621745797-8dd5dc467dd0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D"
-    },
-    {
-      name: "أحمد حسن",
-      year: "2023",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "جيد جداً",
-      specialNote: "مع إتقان أحكام التجويد",
-      image: "https://plus.unsplash.com/premium_photo-1677523779672-7d70e51dd87e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D"
-    },
-    {
-      name: "مريم محمود",
-      year: "2022",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "حاصلة على إجازة",
-      image: "https://plus.unsplash.com/premium_photo-1726783516178-f82051b4f481?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fHw%3D"
-    },
-    {
-      name: "عمر خالد",
-      year: "2022",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "مع دراسة القراءات السبع",
-      image: "https://plus.unsplash.com/premium_photo-1750360904392-74edd7829381?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDl8fHxlbnwwfHx8fHw%3D"
-    },
-    {
-      name: "خديجة علي",
-      year: "2022",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "جيد جداً",
-      specialNote: "أصغر خريجة في الدفعة",
-      image: "https://plus.unsplash.com/premium_photo-1678558710021-fde5127866fb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fHw%3D"
-    },
-    {
-      name: "يوسف إبراهيم",
-      year: "2021",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "الآن معلم في الدار",
-      image: "https://plus.unsplash.com/premium_photo-1678580371526-9c5938ad11ed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDExfHx8ZW58MHx8fHx8"
-    },
-    {
-      name: "سارة حسين",
-      year: "2021",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "ممتاز",
-      specialNote: "مع إجازة في رواية حفص",
-      image: "https://plus.unsplash.com/premium_photo-1678559552200-aa9d8485b94b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDI2fHx8ZW58MHx8fHx8"
-    },
-    {
-      name: "عبد الرحمن صالح",
-      year: "2021",
-      achievement: "حفظ القرآن الكريم كاملاً",
-      grade: "جيد جداً",
-      specialNote: "متقن لأحكام التجويد",
-      image: "https://plus.unsplash.com/premium_photo-1677015055409-422f5c2c1d95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDQwfHx8ZW58MHx8fHx8"
-    }
-  ];
+  const { data: graduates = [], isLoading } = useGraduates();
 
   const stats = [
     { icon: Award, number: "200+", label: "خريج متقن" },
     { icon: Trophy, number: "150+", label: "حاصل على إجازة" },
     { icon: Star, number: "50+", label: "متفوق بامتياز" }
   ];
+
+  if (isLoading) return <div className="py-40 text-center">جاري تحميل قائمة الخريجين...</div>;
 
   return (
     <>
@@ -120,104 +51,49 @@ const Graduates = () => {
       {/* Graduates Grid */}
       <section className="py-20">
         <div className="container">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {graduates.map((graduate, index) => (
-              <Card key={index} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group">
-                <div className="aspect-[4/3] overflow-hidden bg-muted relative">
-                  <Image
-                    src={graduate.image}
-                    alt={graduate.name}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <Badge className="bg-gradient-gold text-foreground shadow-elegant">
-                      دفعة {graduate.year}
-                    </Badge>
-                  </div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-2xl font-bold mb-2">{graduate.name}</h3>
-                  <div className="space-y-2 mb-4">
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">الإنجاز:</span> {graduate.achievement}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">التقدير:</span>{" "}
-                      <Badge variant="secondary" className="mr-2">{graduate.grade}</Badge>
-                    </p>
-                  </div>
-                  <div className="pt-4 border-t border-border">
-                    <div className="flex items-start gap-2">
-                      <Star className="h-4 w-4 text-accent flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-primary font-medium">{graduate.specialNote}</p>
+          {graduates.length === 0 ? (
+            <div className="text-center text-muted-foreground">لا يوجد خريجون مسجلون حالياً</div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {graduates.map((graduate) => (
+                <Card key={graduate.id} className="overflow-hidden shadow-elegant hover:shadow-glow transition-all duration-300 group">
+                  <div className="aspect-[4/3] overflow-hidden bg-muted relative">
+                    {graduate.image ? (
+                      <Image
+                        src={graduate.image}
+                        alt={graduate.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full bg-primary/5">
+                        <GraduationCap className="h-20 w-20 text-primary/20" />
+                      </div>
+                    )}
+                    <div className="absolute top-4 left-4">
+                      <Badge className="bg-gradient-gold text-foreground shadow-elegant">
+                        دفعة {graduate.graduationYear}
+                      </Badge>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Success Stories */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container">
-          <div className="text-center mb-12 animate-slideUp">
-            <h2 className="text-4xl font-bold mb-4">قصص نجاح</h2>
-            <p className="text-muted-foreground text-lg">
-              شهادات من خريجينا عن تجربتهم في الدار
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="shadow-elegant">
-              <CardContent className="p-8">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                    <Image
-                      src="https://plus.unsplash.com/premium_photo-1678559460700-8a1d42ce8239?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bXVzbGltJTIwbWFufGVufDB8fDB8fHww"
-                      alt="محمد عبد الله"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg">محمد عبد الله</h4>
-                    <p className="text-sm text-muted-foreground">خريج 2023</p>
-                  </div>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  "الحمد لله، تجربتي في دار الإحسان كانت رحلة إيمانية رائعة. المعلمون متمكنون وصبورون، والبيئة
-                  التعليمية محفزة جداً. أنصح كل من يريد حفظ القرآن بالانضمام لهذه الدار المباركة."
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-elegant">
-              <CardContent className="p-8">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1648593470206-64f8690efeff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDB8fG11c2xpbSUyMG1hbnxlbnwwfHwwfHx8MA%3D%3D"
-                      alt="فاطمة أحمد"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-lg">فاطمة أحمد</h4>
-                    <p className="text-sm text-muted-foreground">خريجة 2023</p>
-                  </div>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  "بفضل الله ثم بفضل المعلمات في دار الإحسان، تمكنت من حفظ القرآن الكريم كاملاً. المنهج المتبع
-                  احترافي وفعال، والمتابعة مستمرة. جزاهم الله خير الجزاء."
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold mb-2">{graduate.name}</h3>
+                    <div className="space-y-2">
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        <span className="font-medium text-foreground">الإنجاز:</span> {graduate.achievement}
+                      </p>
+                      {graduate.moreInfo && (
+                        <p className="text-sm text-primary font-medium border-t pt-2 mt-2 italic">
+                          "{graduate.moreInfo}"
+                        </p>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -241,4 +117,3 @@ const Graduates = () => {
 };
 
 export default Graduates;
-

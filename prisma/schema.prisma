@@ -31,9 +31,15 @@ model News {
   updatedAt   DateTime? @updatedAt
 }
 
+
+enum MagazineCategory {
+  STUDENT_OF_THE_MONTH  // طالب الشهر
+  TEACHER_OF_THE_MONTH  // معلم الشهر
+}
+
 model Magazine {
   id          Int       @id @default(autoincrement())
-  category    String
+  category    MagazineCategory
   month       String
 
   name        String
@@ -121,4 +127,28 @@ model Group {
   
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
+}
+
+// الخريجون
+model Graduate {
+  id             Int      @id @default(autoincrement())
+  name           String
+  image          String?
+  graduationYear Int?
+  achievement    String?
+  moreInfo       String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime? @updatedAt
+}
+
+// الشكاوى والاقتراحات
+model Complaint {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String?
+  phone     String?
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
 }

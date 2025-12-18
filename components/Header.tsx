@@ -3,12 +3,58 @@
 import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Menu, Moon, Sun, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showDashboardHeader, setShowDashboardHeader] = useState(true);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
+
+  // لما المنيو تتفتح على الموبايل، امنع سكرول الصفحة الخلفية
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
+  // على صفحات الداشبورد: أخفي الهيدر الرئيسي عند السكرول لتحت، وأرجّعه عند السكرول لفوق
+  useEffect(() => {
+    if (!pathname?.startsWith("/dashboard")) {
+      setShowDashboardHeader(true);
+      return;
+    }
+
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      // لو بننزل لتحت وعدّينا شوية بيكسلات، اخفي الهيدر
+      if (currentY > lastScrollY && currentY > 80) {
+        setShowDashboardHeader(false);
+      } else if (currentY < lastScrollY || currentY <= 80) {
+        // لو بنطلع لفوق أو قرّبنا من أول الصفحة، أظهره تاني
+        setShowDashboardHeader(true);
+      }
+
+      lastScrollY = currentY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname]);
 
   const navItems = [
      { title: "الرئيسية", path: "/" },
@@ -23,8 +69,15 @@ const Header = () => {
     { title: "لوحة التحكم", path: "/auth" },
   ];
 
+  const isDashboard = pathname?.startsWith("/dashboard");
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header
+      className={cn(
+        "sticky top-0 md:z-40 z-[100] w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-transform duration-300",
+        isDashboard && !showDashboardHeader ? "-translate-y-full" : "translate-y-0"
+      )}
+    >
       <div className="container flex h-20 items-center justify-between">
         {/* Mobile Menu Button */}
         <Button
@@ -74,7 +127,7 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden border-t border-border/40 bg-background/95 backdrop-blur">
+        <div className="lg:hidden border-t border-border/40 bg-background/95 backdrop-blur h-[calc(100vh-56px)] w-full overflow-y-auto">
           <nav className="container flex flex-col gap-2 py-4">
             {navItems.map((item) => (
               <NavLink

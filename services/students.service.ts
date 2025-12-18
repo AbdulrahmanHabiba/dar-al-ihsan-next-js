@@ -86,8 +86,8 @@ async function createStudent(data: CreateStudentInput) {
                 moreInfo: data.moreInfo,
                 achievement: data.achievement,
                 image: data.image,
-                teacherId: data.teacherId,
-                groupId: data.groupId,
+                teacher: data.teacherId ? { connect: { id: data.teacherId } } : undefined,
+                group: data.groupId ? { connect: { id: data.groupId } } : undefined,
             },
             include: {
                 teacher: {
@@ -140,8 +140,8 @@ async function createManyStudents(data: CreateStudentInput[]) {
               moreInfo: student.moreInfo,
               achievement: student.achievement,
               image: student.image,
-              teacherId: student.teacherId,
-              groupId: student.groupId,
+              teacher: student.teacherId ? { connect: { id: student.teacherId } } : undefined,
+              group: student.groupId ? { connect: { id: student.groupId } } : undefined,
             },
           })
         )
@@ -166,7 +166,17 @@ async function updateStudent(id: number, data: Partial<CreateStudentInput>) {
     try {
         const updatedStudent = await prisma.student.update({
             where: { id },
-            data: data,
+            data: {
+                name: data.name,
+                age: data.age,
+                gender: data.gender,
+                phone: data.phone,
+                moreInfo: data.moreInfo,
+                achievement: data.achievement,
+                image: data.image,
+                teacher: data.teacherId ? { connect: { id: data.teacherId } } : (data.teacherId === null ? { disconnect: true } : undefined),
+                group: data.groupId ? { connect: { id: data.groupId } } : (data.groupId === null ? { disconnect: true } : undefined),
+            },
             include: {
                 teacher: {
                     select: {

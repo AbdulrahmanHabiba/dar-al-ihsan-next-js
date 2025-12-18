@@ -2,25 +2,11 @@
 import NewsSlider from "@/components/home/NewsSlider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Users, Award, GraduationCap, Star, Heart } from "lucide-react";
+import { BookOpen, Users, Award, GraduationCap, Star } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import Image from "next/image";
-import { News } from "@/types/news";
-
-async function getNews(): Promise<News[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/news`, {
-      next: { revalidate: 60 },
-    });
-    if (!res.ok) return [];
-    const data = await res.json();
-    return data.data || [];
-  } catch (error) {
-    console.error("Failed to fetch news:", error);
-    return [];
-  }
-}
-
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { CTASection } from "@/components/ui/CTASection";
 
 const HomePage = async () => {
   const features = [
@@ -53,12 +39,7 @@ const HomePage = async () => {
     { number: "15+", label: "سنة خبرة" }
   ];
 
-  const initialNews = await getNews();
-
- 
-
   return (
-
     <>
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-hero overflow-hidden">
@@ -119,12 +100,10 @@ const HomePage = async () => {
       {/* Features Section */}
       <section className="py-20">
         <div className="container">
-          <div className="text-center mb-12 animate-slideUp">
-            <h2 className="text-4xl font-bold mb-4">لماذا دار الإحسان؟</h2>
-            <p className="text-muted-foreground text-lg">
-              نقدم لك أفضل بيئة تعليمية لحفظ وتجويد القرآن الكريم
-            </p>
-          </div>
+          <SectionHeading
+            title="لماذا دار الإحسان؟"
+            description="نقدم لك أفضل بيئة تعليمية لحفظ وتجويد القرآن الكريم"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
@@ -145,33 +124,16 @@ const HomePage = async () => {
       {/* News Slider */}
       <NewsSlider />
 
-      {/* <iframe
-  src="https://quran.ksu.edu.sa/index.php?l=ar"
-  style={{
-    minWidth: '1000px',
-    width: '100%',
-    height: '890px',
-    border: 'none',
-    overflow: 'hidden',
-  }}
-/> */}
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-primary text-primary-foreground">
-        <div className="container text-center">
-          <div className="max-w-3xl mx-auto animate-slideUp">
-            <Heart className="h-16 w-16 mx-auto mb-6 animate-float" />
-            <h2 className="text-4xl font-bold mb-4">انضم إلى رحلتك الإيمانية</h2>
-            <p className="text-xl mb-8 opacity-90">
-              ابدأ اليوم في حفظ كتاب الله وتعلم أحكام التجويد على أيدي معلمين متخصصين
-            </p>
-            <Button size="lg" variant="secondary" className="text-lg" asChild>
-              <NavLink to="/contact">تواصل معنا الآن</NavLink>
-            </Button>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="انضم إلى رحلتك الإيمانية"
+        description="ابدأ اليوم في حفظ كتاب الله وتعلم أحكام التجويد على أيدي معلمين متخصصين"
+        buttonText="تواصل معنا الآن"
+        buttonLink="/contact"
+      />
     </>
   );
 };
 
 export default HomePage;
+

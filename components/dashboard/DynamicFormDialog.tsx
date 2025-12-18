@@ -31,10 +31,22 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { RichTextEditor } from './rich-text-editor';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { X, Plus, ImageIcon } from 'lucide-react';
+import { X, Plus } from 'lucide-react';
 
-export type FieldType = 'text' | 'textarea' | 'richtext' | 'date' | 'switch' | 'images' | 'url';
+export type FieldType = 'text' | 'textarea' | 'richtext' | 'date' | 'switch' | 'images' | 'url' | 'select' | 'number';
+
+export interface FormFieldOption {
+  label: string;
+  value: string | number;
+}
 
 export interface FormFieldConfig {
   name: string;
@@ -43,6 +55,8 @@ export interface FormFieldConfig {
   placeholder?: string;
   required?: boolean;
   defaultValue?: any;
+  options?: FormFieldOption[];
+  onChange?: (value: any) => void;
 }
 
 interface DynamicFormDialogProps {
@@ -72,7 +86,7 @@ const createDynamicSchema = (fields: FormFieldConfig[]) => {
       case 'date':
         fieldSchema = field.required 
           ? z.string().min(1, `${field.label} مطلوب`)
-          : z.string().optional();
+          : z.string().optional().nullable();
         break;
       case 'url':
         fieldSchema = field.required
@@ -80,12 +94,22 @@ const createDynamicSchema = (fields: FormFieldConfig[]) => {
           : z.string().refine(
               (val) => !val || val === '' || z.string().url().safeParse(val).success,
               { message: 'رابط غير صالح' }
-            ).optional().or(z.literal(''));
+            ).optional().or(z.literal('')).nullable();
+        break;
+      case 'number':
+        fieldSchema = field.required
+          ? z.coerce.number({ invalid_type_error: "يجب أن يكون رقماً" }).min(1, `${field.label} مطلوب`)
+          : z.preprocess((val) => val === "" || val === undefined ? null : val, z.coerce.number().nullable());
+        break;
+      case 'select':
+        fieldSchema = field.required
+          ? z.union([z.string(), z.number()]).refine(val => val !== "" && val !== null, { message: `${field.label} مطلوب` })
+          : z.union([z.string(), z.number(), z.null()]).optional().nullable();
         break;
       default:
         fieldSchema = field.required 
           ? z.string().min(1, `${field.label} مطلوب`)
-          : z.string().optional();
+          : z.string().optional().nullable();
     }
     
     shape[field.name] = fieldSchema;
@@ -183,10 +207,20 @@ export const DynamicFormDialog = ({
 
   const handleSubmit = (data: Record<string, any>) => {
     const imagesField = fields.find(f => f.type === 'images');
+    const cleanedData = { ...data };
+
     if (imagesField) {
-      data[imagesField.name] = imageInputs.filter(img => img.trim() !== '');
+      cleanedData[imagesField.name] = imageInputs.filter(img => img.trim() !== '');
     }
-    onSubmit(data);
+
+    // تنظيف البيانات: تحويل النصوص الفارغة في الحقول الاختيارية إلى null
+    fields.forEach(field => {
+      if (cleanedData[field.name] === "" || cleanedData[field.name] === undefined) {
+        cleanedData[field.name] = null;
+      }
+    });
+
+    onSubmit(cleanedData);
   };
 
   const addImageInput = () => {
@@ -280,13 +314,46 @@ export const DynamicFormDialog = ({
                   value={field.value || ''}
                   dir="ltr"
                 />
-              ) : type === 'url' ? (
+              ) : type === 'select' ? (
+                <Select
+                  onValueChange={(value) => {
+                    let finalValue: any = value;
+                    if (value === "none" || value === "") {
+                      finalValue = null;
+                    } else {
+                      const numValue = Number(value);
+                      finalValue = isNaN(numValue) || value.trim() === "" ? value : numValue;
+                    }
+                    
+                    field.onChange(finalValue);
+                    if (fieldConfig.onChange) {
+                      fieldConfig.onChange(finalValue);
+                    }
+                  }}
+                  value={field.value?.toString() || ""}
+                >
+                  <FormControl>
+                    <SelectTrigger dir="rtl">
+                      <SelectValue placeholder={placeholder} />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent dir="rtl">
+                    {!fieldConfig.required && (
+                      <SelectItem value="none">بدون اختيار</SelectItem>
+                    )}
+                    {fieldConfig.options?.map((option) => (
+                      <SelectItem key={option.value} value={option.value.toString()}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : type === 'number' ? (
                 <Input
-                  type="url"
+                  type="number"
                   placeholder={placeholder}
                   {...field}
                   value={field.value || ''}
-                  dir="ltr"
                 />
               ) : (
                 <Input

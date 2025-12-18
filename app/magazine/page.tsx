@@ -4,16 +4,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { NewsDetailCard } from "@/components/magazine/NewsDetailCard";
 import { FeaturedPersonCard } from "@/components/FeaturedPersonCard";
 import { useNews } from "@/hooks/useNews";
+import { useMagazine } from "@/hooks/useMagazine";
 
 export default function MagazinePage() {
-  // Get all news
-  const { data: allNews, isLoading: isLoadingAll } = useNews();
-  const publishedNews= allNews?.filter((news)=> news.published === true)
+  // جلب الأخبار
+  const { data: allNews, isLoading: isLoadingNews } = useNews();
+  const publishedNews = allNews?.filter((news) => news.published === true);
+
+  // جلب بيانات المجلة (طالب الشهر، معلم الشهر، إلخ)
+  const { data: magazineItems = [], isLoading: isLoadingMag } = useMagazine();
+  const publishedMag = magazineItems.filter(item => item.published);
+
+  // تصفية البيانات حسب التصنيفات
+  const studentOfMonth = publishedMag.filter(item => item.category === "STUDENT_OF_THE_MONTH");
+  const teacherOfMonth = publishedMag.filter(item => item.category === "TEACHER_OF_THE_MONTH");
 
   return (
     <div className="container mx-auto px-4 py-12">
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="text-center mb-12 animate-slideUp">
         <h1 className="text-4xl font-bold mb-4">مجلة دار الإحسان</h1>
         <p className="text-muted-foreground text-lg">
           تابع آخر الأخبار والفعاليات وتعرف على نجوم دار الإحسان
@@ -22,16 +31,15 @@ export default function MagazinePage() {
 
       {/* Tabs */}
       <Tabs defaultValue="news" className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8 px-1 mx-1 text-sm">
+        <TabsList className="grid w-full grid-cols-3 mb-8 px-1 mx-1 text-sm bg-muted/50">
           <TabsTrigger value="news">آخر الأخبار</TabsTrigger>
           <TabsTrigger value="student">طالب الشهر</TabsTrigger>
-          <TabsTrigger value="students">الطلاب المميزون</TabsTrigger>
           <TabsTrigger value="teacher">معلم الشهر</TabsTrigger>
         </TabsList>
 
         {/* News Tab */}
         <TabsContent value="news">
-          {isLoadingAll ? (
+          {isLoadingNews ? (
             <NewsGridSkeleton />
           ) : publishedNews && publishedNews.length > 0 ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -48,33 +56,48 @@ export default function MagazinePage() {
 
         {/* Student of Month Tab */}
         <TabsContent value="student">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeaturedPersonCard
-              name="محمد أحمد"
-              info="معلمه: الشيخ عبدالله"
-              imageUrl="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"
-            />
-          </div>
-        </TabsContent>
-
-        {/* Distinguished Students Tab */}
-        <TabsContent value="students">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeaturedPersonCard name="أحمد محمود" info="حافظ 10 أجزاء" />
-            <FeaturedPersonCard name="خالد سعيد" info="حافظ 15 جزء" />
-            <FeaturedPersonCard name="عمر يوسف" info="حافظ 20 جزء" />
-          </div>
+          {isLoadingMag ? (
+            <div className="py-12 text-center">جاري التحميل...</div>
+          ) : studentOfMonth.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {studentOfMonth.map((item) => (
+                <FeaturedPersonCard
+                  key={item.id}
+                  name={item.name}
+                  info={item.month}
+                  achievement={item.achievement}
+                  imageUrl={item.image || undefined}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">لا يوجد طلاب شهر مسجلون حالياً</p>
+            </div>
+          )}
         </TabsContent>
 
         {/* Teacher of Month Tab */}
         <TabsContent value="teacher">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeaturedPersonCard
-              name="الشيخ عبدالله محمد"
-              info="متخصص في التجويد"
-              imageUrl="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop"
-            />
-          </div>
+          {isLoadingMag ? (
+            <div className="py-12 text-center">جاري التحميل...</div>
+          ) : teacherOfMonth.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {teacherOfMonth.map((item) => (
+                <FeaturedPersonCard
+                  key={item.id}
+                  name={item.name}
+                  info={item.month}
+                  achievement={item.achievement}
+                  imageUrl={item.image || undefined}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">لا يوجد معلمو شهر مسجلون حالياً</p>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
     </div>

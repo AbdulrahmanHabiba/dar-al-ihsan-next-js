@@ -1,10 +1,20 @@
-import { BookOpen, Mail, MapPin, Phone, Globe } from "lucide-react";
+"use client";
+
+import {  Mail, MapPin, Phone, Globe } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { SocialCard } from "./SocialCard";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+
 
 const Footer = () => {
-  return (
+  const pathname = usePathname();
+const isDashboard = pathname?.startsWith("/dashboard");
+
+if (isDashboard) {
+  return <div className="mt-20"></div> ;
+}
+return (
     <footer className="bg-card border-t border-border mt-20">
       <div className="container py-12">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

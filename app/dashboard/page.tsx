@@ -1,135 +1,70 @@
-"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Newspaper, Users, GraduationCap, MessageSquare, BookOpen, TrendingUp } from "lucide-react";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { 
-  LayoutDashboard, 
-  Newspaper, 
-  GraduationCap, 
-  Users, 
-  MessageSquare, 
-  BookOpen,
-  TrendingUp,
-  LogOut,
-  CircleUserRound
-} from "lucide-react";
-import DashboardStats from "@/components/dashboard/layout/DashboardStats";
-import NewsManager from "@/components/dashboard/NewsManager";
-import TeachersManager from "@/components/dashboard/TeachersManager";
-import GraduatesManager from "@/components/dashboard/GraduatesManager";
-import ComplaintsManager from "@/components/dashboard/ComplaintsManager";
-import MagazineManager from "@/components/dashboard/MagazineManager";
-import SuccessStoriesManager from "@/components/dashboard/SuccessStoriesManager";
-import { logout } from "@/lib/auth";
-import StudentsManager from "@/components/dashboard/StudentsManager";
+const stats = [
+  { title: "الأخبار المنشورة", value: "24", icon: Newspaper, description: "آخر تحديث اليوم", color: "text-blue-500" },
+  { title: "المعلمين", value: "12", icon: Users, description: "معلم نشط", color: "text-green-500" },
+  { title: "الخريجين", value: "156", icon: GraduationCap, description: "خريج هذا العام", color: "text-purple-500" },
+  { title: "الشكاوي والاقتراحات", value: "8", icon: MessageSquare, description: "في انتظار المراجعة", color: "text-orange-500" },
+  { title: "مقالات المجلة", value: "32", icon: BookOpen, description: "مقال منشور", color: "text-pink-500" },
+  { title: "قصص النجاح", value: "18", icon: TrendingUp, description: "قصة ملهمة", color: "text-cyan-500" },
+];
 
-const Dashboard = () => {
-  const router = useRouter();
-  const [activeTab, setActiveTab] = useState("overview");
-
-  const handleLogout = () => {
-    logout();
-    router.push("/auth");
-  };
-
+export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between flex-col sm:flex-row gap-5 sm:gap-0">
-          <div className="flex items-center gap-3">
-            <LayoutDashboard className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">لوحة التحكم - دار التحفيظ</h1>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="text-right flex items-center gap-3 sm:block border p-2 sm:border-none">
-              <p className="font-medium">المدير العام :</p>
-              <p className="text-sm text-muted-foreground">admin@dar.com</p>
+    <div className="space-y-6 text-right" dir="rtl">
+      <div>
+        <h2 className="text-3xl font-bold tracking-tight">نظرة عامة</h2>
+        <p className="text-muted-foreground">إحصائيات وبيانات الدار</p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {stats.map((stat) => (
+          <Card key={stat.title} className="hover:shadow-lg transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+              <stat.icon className={`h-5 w-5 ${stat.color}`} />
+            </CardHeader>
+            <CardContent>
+              <div className="text-3xl font-bold">{stat.value}</div>
+              <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle>آخر الأنشطة</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3 pb-3 border-b">
+                <div className="bg-primary/10 p-2 rounded-full"><Newspaper className="h-4 w-4 text-primary" /></div>
+                <div className="flex-1"><p className="text-sm font-medium">تم نشر خبر جديد</p><p className="text-xs text-muted-foreground">منذ ساعتين</p></div>
+              </div>
+              <div className="flex items-start gap-3 pb-3 border-b ">
+                <div className="bg-green-100 p-2 rounded-full"><GraduationCap className="h-4 w-4 text-green-600" /></div>
+                <div className="flex-1"><p className="text-sm font-medium">تم إضافة 3 خريجين جدد</p><p className="text-xs text-muted-foreground">منذ 5 ساعات</p></div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="bg-orange-100 p-2 rounded-full"><MessageSquare className="h-4 w-4 text-orange-600" /></div>
+                <div className="flex-1"><p className="text-sm font-medium">شكوى جديدة تحتاج للمراجعة</p><p className="text-xs text-muted-foreground">منذ يوم واحد</p></div>
+              </div>
             </div>
-            <Button variant="outline" size="icon" onClick={handleLogout}>
-              <LogOut className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      <div className="container mx-auto px-2 sm:px-4 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-8 gap-2">
-            <TabsTrigger value="overview" className="flex items-center gap-2">
-              <LayoutDashboard className="h-4 w-4" />
-              <span className="hidden md:inline">نظرة عامة</span>
-            </TabsTrigger>
-            <TabsTrigger value="news" className="flex items-center gap-2">
-              <Newspaper className="h-4 w-4" />
-              <span className="hidden md:inline">الأخبار</span>
-            </TabsTrigger>
-            <TabsTrigger value="students" className="flex items-center gap-2">
-              <CircleUserRound  className="h-4 w-4" />
-              <span className="hidden md:inline">الطلاب</span>
-            </TabsTrigger>
-            <TabsTrigger value="teachers" className="flex items-center gap-2">
-              <Users className="h-4 w-4" />
-              <span className="hidden md:inline">المعلمين</span>
-            </TabsTrigger>
-            <TabsTrigger value="graduates" className="flex items-center gap-2">
-              <GraduationCap className="h-4 w-4" />
-              <span className="hidden md:inline">الخريجين</span>
-            </TabsTrigger>
-            <TabsTrigger value="complaints" className="flex items-center gap-2">
-              <MessageSquare className="h-4 w-4" />
-              <span className="hidden md:inline">الشكاوي</span>
-            </TabsTrigger>
-            <TabsTrigger value="magazine" className="flex items-center gap-2">
-              <BookOpen className="h-4 w-4" />
-              <span className="hidden md:inline">المجلة</span>
-            </TabsTrigger>
-            <TabsTrigger value="stories" className="flex items-center gap-2">
-              <TrendingUp className="h-4 w-4" />
-              <span className="hidden md:inline">قصص النجاح</span>
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-6">
-            <DashboardStats />
-          </TabsContent>
-
-          <TabsContent value="news">
-            <NewsManager />
-          </TabsContent>
-
-          <TabsContent value="students">
-            <StudentsManager />
-          </TabsContent>
-
-
-
-          <TabsContent value="teachers">
-            <TeachersManager />
-          </TabsContent>
-
-          <TabsContent value="graduates">
-            <GraduatesManager />
-          </TabsContent>
-
-          <TabsContent value="complaints">
-            <ComplaintsManager />
-          </TabsContent>
-
-          <TabsContent value="magazine">
-            <MagazineManager />
-          </TabsContent>
-
-          <TabsContent value="stories">
-            <SuccessStoriesManager />
-          </TabsContent>
-        </Tabs>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>إحصائيات الشهر</CardTitle></CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between"><span className="text-sm">معدل النشر اليومي</span><span className="text-sm font-bold">2.4 خبر</span></div>
+              <div className="flex items-center justify-between"><span className="text-sm">إجمالي الزوار</span><span className="text-sm font-bold">1,234</span></div>
+              <div className="flex items-center justify-between"><span className="text-sm">معدل التفاعل</span><span className="text-sm font-bold">78%</span></div>
+              <div className="flex items-center justify-between"><span className="text-sm">الشكاوي المحلولة</span><span className="text-sm font-bold">15 من 23</span></div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
-};
-
-export default Dashboard;
+}

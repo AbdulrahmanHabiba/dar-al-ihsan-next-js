@@ -1,4 +1,14 @@
 import { handleApi } from "@/lib/api/handler";
+import { createManyStudents, CreateStudentInput } from "@/services/students.service";
+import { NextRequest } from "next/server";
+
+export const POST = handleApi(async (req: NextRequest) => {
+  const body = await req.json();
+  const students: CreateStudentInput[] = body.students || [];
+  return await createManyStudents(students);
+});
+
+import { handleApi } from "@/lib/api/handler";
 import { NextRequest } from "next/server";
 import { createManyStudents, CreateStudentInput } from "@/services/students.service" ;
 
