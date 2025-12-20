@@ -128,9 +128,7 @@ export const QuranPlayer = () => {
         }
     };
 
-    useEffect(() => {
-        togglePlay();
-    }, []);
+
 
     const changeRadio = (radio: Radio) => {
         if (audioRef.current) {
@@ -254,11 +252,11 @@ export const QuranPlayer = () => {
                         </div>
 
                         <Sheet open={open} onOpenChange={setOpen}>
-                          {!isMobile && <SheetTrigger asChild>
+                            {!isMobile && <SheetTrigger asChild>
                                 <Button variant="outline" size="icon">
-                                        <List className="h-3 w-3 sm:h-4 sm:w-4" />
-                                    </Button>
-                                </SheetTrigger>
+                                    <List className="h-3 w-3 sm:h-4 sm:w-4" />
+                                </Button>
+                            </SheetTrigger>
                             }
                             <SheetContent side="bottom" className="h-[80vh]">
                                 <SheetHeader>

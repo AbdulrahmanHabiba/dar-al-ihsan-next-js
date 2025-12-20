@@ -1,6 +1,6 @@
 "use client";
 
-import {  Mail, MapPin, Phone, Globe } from "lucide-react";
+import { Mail, MapPin, Phone, Globe } from "lucide-react";
 import { NavLink } from "./NavLink";
 import { SocialCard } from "./SocialCard";
 import { usePathname } from "next/navigation";
@@ -9,16 +9,16 @@ import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const pathname = usePathname();
-const isDashboard = pathname?.startsWith("/dashboard");
+  const isDashboard = pathname?.startsWith("/dashboard");
 
-if (isDashboard) {
-  return <div className="mt-20"></div> ;
-}
-return (
-    <footer className="bg-card border-t border-border mt-20">
+  if (isDashboard) {
+    return <div className="mt-20"></div>;
+  }
+  return (
+    <footer className="bg-card border-t border-border mt-20 pb-12">
       <div className="container py-12">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          
+
           {/* About Section - Compact with Enhanced Map */}
           <div className="space-y-4">
             <div className="flex items-start gap-3">
@@ -45,7 +45,7 @@ return (
                 </div>
               </div>
             </div>
-            
+
             {/* Enhanced Map - Bigger & More Prominent */}
             <div className="rounded-xl overflow-hidden border-2 border-emerald-200 dark:border-emerald-800 shadow-lg hover:shadow-xl transition-shadow">
               <div className="relative h-52 bg-slate-200 dark:bg-slate-700">
@@ -70,8 +70,8 @@ return (
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <NavLink 
-                  to="/" 
+                <NavLink
+                  to="/"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -79,8 +79,8 @@ return (
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/about" 
+                <NavLink
+                  to="/about"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -88,8 +88,8 @@ return (
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/teachers" 
+                <NavLink
+                  to="/teachers"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -97,8 +97,8 @@ return (
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/graduates" 
+                <NavLink
+                  to="/graduates"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -115,8 +115,8 @@ return (
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <NavLink 
-                  to="/quran" 
+                <NavLink
+                  to="/quran"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -124,8 +124,8 @@ return (
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/azkar" 
+                <NavLink
+                  to="/azkar"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -133,8 +133,8 @@ return (
                 </NavLink>
               </li>
               <li>
-                <NavLink 
-                  to="/location" 
+                <NavLink
+                  to="/location"
                   className="text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-600 group-hover:w-2 transition-all"></span>
@@ -155,7 +155,7 @@ return (
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <a 
+                <a
                   href="tel:01159556715"
                   className="flex items-center gap-3 text-slate-600 dark:text-slate-400 group hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
@@ -166,7 +166,7 @@ return (
                 </a>
               </li>
               <li>
-                <a 
+                <a
                   href="mailto:info@dar-alihsan.com"
                   className="flex items-center gap-3 text-slate-600 dark:text-slate-400 group hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
                 >
@@ -186,41 +186,44 @@ return (
               </li>
             </ul>
           </div>
-        </div>        
+        </div>
 
         {/* Social/Official Pages */}
-        <div className="text-center mt-8">
-        <h4 className="font-semibold text-center bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">تابعنا على منصات التواصل .</h4>
-
-          <div className="flex justify-center items-center gap-3 flex-col md:flex-row">
-            {/* صفحة الفيسبوك */}
-            <SocialCard
-              name="صفحة الدار على الفيسبوك"
-              url="https://www.facebook.com/profile.php?id=100013462008509"
-              imgSrc="https://scontent.fcai11-1.fna.fbcdn.net/v/t39.30808-1/238374365_1278677039257684_6726629224603724103_n.jpg?stp=cp0_dst-jpg_s80x80_tt6&_nc_cat=103&ccb=1-7&_nc_sid=9a2c5d&_nc_eui2=AeHWYXdLcPMc9nNa43mCDW0sOWYeh1zbub05Zh6HXNu5vdpTK8bw23g7Ry23QT2vAEck2tTWBi-nNgZmNKRAj11B&_nc_ohc=8H_9UuG2-JUQ7kNvwE1Y3sh&_nc_oc=Adk55onBCPkOu5ZZGYUq0FrSZDU32HdCQ7InBC2-S5kEN93DPaU3Zz7oZXIw3-UTlBg&_nc_zt=24&_nc_ht=scontent.fcai11-1.fna&_nc_gid=Y86O3y5ecNC1WyFgiUXWyA&oh=00_AfjjHC3SWJJGcIGYLOmnueo1U3DIawV0ACpqsvB87Ifvdg&oe=69306F50"
-              subtitle="الحساب الرسمي للدار"
-              iconType="facebook"
-            />
-            {/* جروب الفيسبوك */}
-            <SocialCard
-              name="جروب الدار على الفيسبوك"
-              url="https://www.facebook.com/groups/1550459465114127"
-              imgSrc="https://scontent.fcai11-1.fna.fbcdn.net/v/t1.6435-9/92219348_930040607454664_7874757111979180032_n.jpg?stp=c56.0.332.332a_cp0_dst-jpg_s75x225_tt6&_nc_cat=101&ccb=1-7&_nc_sid=1760b9&_nc_eui2=AeF97k3cw9gYeiUyY3QHqMk1wN6XTQMPdSDA3pdNAw91ILVeFvqflAR17VGzWlvz52o6ejDzGXeXDtA4gjWEmW6X&_nc_ohc=MuPIEmT9n7AQ7kNvwGwt2sB&_nc_oc=AdmIdRspMg9xV4sPnCSuB2nMOckxqfpF0_dlMy-Za-nFGECYqkAHYr-iTAetwQe8uW8&_nc_zt=23&_nc_ht=scontent.fcai11-1.fna&_nc_gid=Y86O3y5ecNC1WyFgiUXWyA&oh=00_Afi2mBZozjl2mxOghb57pubgk-dRVgR-Cgetld2emJqPSQ&oe=6951EB5F"
-              subtitle="مجموعة الأخبار و النقاشات"
-              iconType="facebook"
-            />
-            {/* قناة الواتساب */}
-            <SocialCard
-              name="قناة الدار على الواتساب"
-              url="https://wa.me/201159556715"
-              imgSrc={undefined}
-              subtitle="اخر الأخبار على واتساب"
-              iconType="whatsapp"
-            />
+        <div className="mt-12 pt-8 border-t border-border/50">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <h4 className="font-bold text-sm text-muted-foreground whitespace-nowrap">
+              تابعنا على منصات التواصل:
+            </h4>
+            <div className="flex justify-center flex-wrap gap-3">
+              {/* صفحة الفيسبوك */}
+              <SocialCard
+                name="صفحة الفيسبوك"
+                url="https://www.facebook.com/profile.php?id=100013462008509"
+                imgSrc="https://scontent.fcai11-1.fna.fbcdn.net/v/t39.30808-1/238374365_1278677039257684_6726629224603724103_n.jpg?stp=cp0_dst-jpg_s80x80_tt6&_nc_cat=103&ccb=1-7&_nc_sid=9a2c5d&_nc_eui2=AeHWYXdLcPMc9nNa43mCDW0sOWYeh1zbub05Zh6HXNu5vdpTK8bw23g7Ry23QT2vAEck2tTWBi-nNgZmNKRAj11B&_nc_ohc=8H_9UuG2-JUQ7kNvwE1Y3sh&_nc_oc=Adk55onBCPkOu5ZZGYUq0FrSZDU32HdCQ7InBC2-S5kEN93DPaU3Zz7oZXIw3-UTlBg&_nc_zt=24&_nc_ht=scontent.fcai11-1.fna&_nc_gid=Y86O3y5ecNC1WyFgiUXWyA&oh=00_AfjjHC3SWJJGcIGYLOmnueo1U3DIawV0ACpqsvB87Ifvdg&oe=69306F50"
+                subtitle="الحساب الرسمي"
+                iconType="facebook"
+              />
+              {/* جروب الفيسبوك */}
+              <SocialCard
+                name="جروب الدار"
+                url="https://www.facebook.com/groups/1550459465114127"
+                imgSrc="https://scontent.fcai11-1.fna.fbcdn.net/v/t1.6435-9/92219348_930040607454664_7874757111979180032_n.jpg?stp=c56.0.332.332a_cp0_dst-jpg_s75x225_tt6&_nc_cat=101&ccb=1-7&_nc_sid=1760b9&_nc_eui2=AeF97k3cw9gYeiUyY3QHqMk1wN6XTQMPdSDA3pdNAw91ILVeFvqflAR17VGzWlvz52o6ejDzGXeXDtA4gjWEmW6X&_nc_ohc=MuPIEmT9n7AQ7kNvwGwt2sB&_nc_oc=AdmIdRspMg9xV4sPnCSuB2nMOckxqfpF0_dlMy-Za-nFGECYqkAHYr-iTAetwQe8uW8&_nc_zt=23&_nc_ht=scontent.fcai11-1.fna&_nc_gid=Y86O3y5ecNC1WyFgiUXWyA&oh=00_Afi2mBZozjl2mxOghb57pubgk-dRVgR-Cgetld2emJqPSQ&oe=6951EB5F"
+                subtitle="مجموعة النقاشات"
+                iconType="facebook"
+              />
+              {/* قناة الواتساب */}
+              <SocialCard
+                name="قناة الواتساب"
+                url="https://wa.me/201159556715"
+                imgSrc={undefined}
+                subtitle="آخر الأخبار"
+                iconType="whatsapp"
+              />
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 pb-10 pt-5 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="mt-12 pt-8 border-t border-border/50">
           <FooterCopyright />
         </div>
       </div>
@@ -232,36 +235,40 @@ export default Footer;
 
 function FooterCopyright() {
   return (
-    <section className="pt-6 pb-4 text-center text-sm text-muted-foreground">
-      <p className="text-xs sm:text-sm">
-        جميع الحقوق محفوظة © 2025 - دار الإحسان لتحفيظ وتجويد القرآن الكريم.
+    <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-muted-foreground">
+      <p className="text-center md:text-right">
+        جميع الحقوق محفوظة © 2025 - <span className="font-semibold text-foreground/80">دار الإحسان لتحفيظ وتجويد القرآن الكريم</span>
       </p>
 
-      <div className="mt-3 flex items-center justify-center gap-6">
-        <a
-          href="https://abdulrahman-habiba.vercel.app"
-          className="flex items-center gap-2 text-xs sm:text-sm hover:text-foreground transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Globe className="h-4 w-4" />
-          <span>موقع المطوّر</span>
-        </a>
+      <div className="flex items-center gap-6 shadow-md shadow-md">
+        <div className="flex items-center gap-4">
+          <div className="h-4 w-px bg-border/50 hidden md:block" />
 
-        <a
-          href="https://wa.me/201113951795"
-          className="flex items-center gap-2 text-xs sm:text-sm hover:text-foreground transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Phone className="h-4 w-4" />
-          <span>تواصل واتساب</span>
-        </a>
+          <a
+            href="https://abdulrahman-habiba.vercel.app"
+            className="hover:text-primary transition-colors flex items-center gap-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Globe className="h-4 w-4" />
+            <p className="text-xs">
+            برمجة: <span className="text-primary font-bold">عبدالرحمن حبيبة</span>
+          </p>
+          </a>
+          <a
+            href="https://wa.me/201113951795"
+            className="hover:text-primary transition-colors flex items-center gap-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Phone className="h-4 w-4" />
+            <span>واتساب</span>
+          </a>
+        </div>
+
+
+        
       </div>
-
-      <p className="mt-2 text-[11px] sm:text-xs text-muted-foreground">
-        تطوير وبرمجة: عبدالرحمن حبيبة
-      </p>
-    </section>
+    </div>
   );
 }
