@@ -25,7 +25,7 @@ const navItems = [
   { href: "/dashboard/news", label: "الأخبار", icon: Newspaper },
   { href: "/dashboard/students", label: "الطلاب", icon: CircleUserRound },
   { href: "/dashboard/teachers", label: "المعلمين", icon: Users },
-  { href: "/dashboard/groups", label: "المجموعات", icon: Presentation  },
+  { href: "/dashboard/groups", label: "المجموعات", icon: Presentation },
   { href: "/dashboard/graduates", label: "الخريجين", icon: GraduationCap },
   { href: "/dashboard/complaints", label: "الشكاوي", icon: MessageSquare },
   { href: "/dashboard/magazine", label: "المجلة", icon: BookOpen },
@@ -110,7 +110,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <nav className="space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = item.href === "/dashboard"
+                ? pathname === "/dashboard"
+                : pathname.startsWith(item.href);
 
               return (
                 <Link
@@ -137,7 +139,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <div className="flex items-center justify-around gap-1 px-2 py-3">
               {navItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const isActive = item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname.startsWith(item.href);
 
                 return (
                   <Link

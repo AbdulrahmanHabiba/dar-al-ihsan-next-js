@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cairo, Amiri } from "next/font/google";
+import { Cairo, Amiri, Aref_Ruqaa } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
@@ -21,6 +21,13 @@ const amiri = Amiri({
   weight: ["400", "700"],
   subsets: ["arabic"],
   variable: "--font-amiri",
+  display: "swap",
+});
+
+const ruqaa = Aref_Ruqaa({
+  subsets: ["arabic"],
+  weight: "400",
+  variable: "--font-ruqaa",
   display: "swap",
 });
 
@@ -49,7 +56,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={`${cairo.variable} ${amiri.variable}`}>
+      <body className={`${cairo.variable} ${amiri.variable} ${ruqaa.variable}`}>
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="light">
             <TooltipProvider>
@@ -65,7 +72,7 @@ export default function RootLayout({
                 phoneNumber="+201159556715"
                 message="مرحباً، أود الاستفسار عن دار الإحسان لتحفيظ القرآن الكريم"
               />
-               <QuranPlayer />
+              <QuranPlayer />
               <Toaster />
               <Sonner />
             </TooltipProvider>

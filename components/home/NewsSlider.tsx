@@ -15,22 +15,19 @@ const NewsSlider = () => {
 
   if (isLoading) {
     return (
-      <div className="container py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[1, 2, 3].map(i => (
             <div key={i} className="aspect-video bg-muted animate-pulse rounded-xl" />
           ))}
         </div>
-      </div>
     );
   }
 
   if (publishedNews.length === 0) return null;
 
-  return (
-    <section className="py-24 bg-gradient-to-b from-background to-accent/20">
-      <div className="container">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+  return (<>
+     {/* <section className="bg-gradient-to-b from-background to-accent/20"> */}
+        {/* <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl animate-slideRight">
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
               آخر الأخبار والفعاليات
@@ -39,20 +36,15 @@ const NewsSlider = () => {
               ابقَ على اطلاع دائم بكل ما هو جديد في دار الإحسان، من تكريمات ومسابقات وفعاليات تعليمية متميزة.
             </p>
           </div>
-          <Button variant="ghost" asChild className="group text-primary hover:text-primary hover:bg-primary/5 animate-slideLeft">
-            <Link href="/magazine" className="flex items-center gap-2 font-bold text-lg">
-              عرض كل الأخبار
-              <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
-            </Link>
-          </Button>
-        </div>
+     
+        </div> */}
 
         <div className="relative">
           <Carousel
-            opts={{
-              align: "start",
-              loop: publishedNews.length > 3,
-            }}
+            // opts={{
+            //   align: "start",
+            //   loop: publishedNews.length > 3,
+            // }}
             className="w-full"
           >
             <CarouselContent className="-ml-4 md:-ml-6">
@@ -102,17 +94,23 @@ const NewsSlider = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {publishedNews.length > 3 && (
+            {/* {publishedNews.length > 3 && (
               <div className="hidden md:flex justify-end gap-3 mt-8">
                 <CarouselPrevious className="static h-12 w-12 border-2 bg-background hover:bg-primary hover:text-white transition-all duration-300 translate-x-0" />
                 <CarouselNext className="static h-12 w-12 border-2 bg-background hover:bg-primary hover:text-white transition-all duration-300 translate-x-0" />
               </div>
-            )}
+            )} */}
           </Carousel>
         </div>
-      </div>
-    </section>
-  );
+        <Button variant="ghost" asChild className="group text-primary hover:text-primary hover:bg-primary/5 animate-slideLeft w-[200px] mx-auto">
+            <Link href="/magazine" className="flex items-center gap-2 font-bold text-lg">
+              عرض كل الأخبار
+              <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1" />
+            </Link>
+          </Button>
+
+    {/* </section> */}
+ </> );
 };
 
 

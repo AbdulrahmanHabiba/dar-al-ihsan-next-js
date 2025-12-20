@@ -13,6 +13,11 @@ export default {
   		}
   	},
   	extend: {
+  		fontFamily: {
+  			cairo: ['var(--font-cairo)'],
+  			amiri: ['var(--font-amiri)'],
+  			ruqaa: ['var(--font-ruqaa)'],
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
