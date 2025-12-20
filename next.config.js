@@ -4,23 +4,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
+        hostname: '**',
       },
       {
-        protocol: 'https',
-        hostname: 'plus.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.islam-online.net',
-      },
-      {
-        protocol: 'https',
-        hostname: 'pbs.twimg.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'scontent.fcai11-1.fna.fbcdn.net',
+        protocol: 'http',
+        hostname: '**',
       },
     ],
   },
