@@ -48,7 +48,7 @@ interface UserInfo {
     supervisorId?: number | null;
     student?: { name: string } | null;
     teacher?: { name: string } | null;
-    supervisor?: { name: string } | null;
+    supervisor?: { name: string; username?: string } | null;
 }
 
 const UserManagementPage = () => {
@@ -464,7 +464,7 @@ const UserManagementPage = () => {
                                 {viewingUser.supervisor && (
                                     <div className="p-3 rounded-lg bg-amber-50 border border-amber-100 col-span-2">
                                         <p className="text-amber-600 mb-1">مرتبط بالمشرف:</p>
-                                        <p className="font-bold text-amber-900">{viewingUser.supervisor.name || viewingUser.supervisor.username}</p>
+                                        <p className="font-bold text-amber-900">{viewingUser.supervisor.name || ""}</p>
                                     </div>
                                 )}
                             </div>

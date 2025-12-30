@@ -13,6 +13,12 @@ async function getAllUsers() {
       role: true,
       isActive: true,
       createdAt: true,
+      studentId: true,
+      teacherId: true,
+      supervisorId: true,
+      student: { select: { name: true } },
+      teacher: { select: { name: true } },
+      supervisor: { select: { name: true } },
     },
     orderBy: { createdAt: "desc" },
   });
