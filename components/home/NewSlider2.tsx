@@ -85,7 +85,7 @@ export default function NewSlider2({ initialData }: NewSlider2Props) {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex items-center justify-between mt-8">
+            <div className="flex items-center justify-center gap-4 flex-col sm:flex-row sm:justify-between mt-8">
                 <div className="flex gap-2">
                     {scrollSnaps.map((_, index) => (
                         <button
@@ -100,7 +100,7 @@ export default function NewSlider2({ initialData }: NewSlider2Props) {
                     ))}
                 </div>
 
-                <div className="flex gap-3">
+                <div className="flex gap-3 ">
                     <Button
                         variant="outline"
                         size="icon"
