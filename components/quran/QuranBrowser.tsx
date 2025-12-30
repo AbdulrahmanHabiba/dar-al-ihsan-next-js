@@ -426,9 +426,8 @@ export default function QuranBrowser() {
                                 <SkipForward className="h-4 w-4" />
                             </Button>
                             <Button
-                                variant="primary"
                                 size="icon"
-                                className="h-10 w-10 rounded-full shadow-md bg-primary hover:scale-105 transition-all text-white"
+                                className="h-10 w-10 rounded-full shadow-md bg-primary hover:bg-primary/90 hover:scale-105 transition-all text-white"
                                 onClick={togglePlay}
                             >
                                 {isPlaying ? <Pause className="h-5 w-5 fill-current" /> : <Play className="h-5 w-5 fill-current ml-1" />}
