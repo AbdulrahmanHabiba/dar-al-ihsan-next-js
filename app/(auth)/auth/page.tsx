@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,7 @@ import { Loader2, User, Lock, Mail, Phone, Hash, ChevronRight } from "lucide-rea
 import { useLogin, useRegister } from "@/hooks/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 
-const AuthPage = () => {
+const AuthPageContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const { toast } = useToast();
@@ -255,4 +255,17 @@ const AuthPage = () => {
     );
 };
 
+const AuthPage = () => {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-secondary/10">
+                <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            </div>
+        }>
+            <AuthPageContent />
+        </Suspense>
+    );
+};
+
 export default AuthPage;
+
