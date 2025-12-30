@@ -85,9 +85,9 @@ export const QuranPlayer = () => {
         try {
             if (!audioRef.current || audioRef.current.src !== currentRadio.url) {
                 // إنشاء audio element جديد أو تحديث الـ src
-                if (audioRef.current) {
-                    audioRef.current.pause();
-                }
+                // if (audioRef.current) {
+                //     audioRef.current.pause();
+                // }
                 audioRef.current = new Audio(currentRadio.url);
                 audioRef.current.volume = isMuted ? 0 : volume / 100;
 
@@ -160,11 +160,11 @@ export const QuranPlayer = () => {
 
     return (
         <div className="fixed bottom-0 left-0 right-0 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-t shadow-lg z-50 ">
-            <div className="container mx-auto px-4 py-3">
+            <div className="container mx-auto px-4  md:py-3 sm:py-2 py-1">
                 <div className="flex items-center justify-between gap-4">
                     {/* LEFT: Avatar + info */}
                     <div className="min-w-0 flex items-center gap-4 cursor-pointer" onClick={() => isMobile ? setOpen(true) : null}>
-                        <Avatar className="sm:h-12 sm:w-12 h-10 w-10 shrink-0">
+                        <Avatar className="md:h-12 md:w-12 sm:h-10 sm:w-10 h-10 w-10 shrink-0">
                             <AvatarImage src={currentRadio.img} alt={currentRadio.name} />
                             <AvatarFallback>{currentRadio.name[0]}</AvatarFallback>
                         </Avatar>

@@ -1,7 +1,7 @@
 
-import { apiClient } from "@/lib//api/client";
+import { apiClient } from "@/lib/api/client";
 import { News } from "@/types/news";
-import { useMutation, useQuery, useQueryClient, QueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 // Get All News
 const useNews = (initialData?: News[]) => {

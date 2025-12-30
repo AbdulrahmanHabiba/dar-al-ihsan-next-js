@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { News } from "@/types/news";
 import { useNews, useUpdateLikes } from "@/hooks/useNews";
 import { Card, CardContent } from "@/components/ui/card";
-import { Calendar, Heart, User, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Calendar, Heart, ArrowLeft,  ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";

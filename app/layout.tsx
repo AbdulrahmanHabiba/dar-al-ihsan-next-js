@@ -6,10 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/app/providers";
-import { FloatingActionButton } from "@/components/FloatingActionButton";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { QuranPlayer } from "@/components/QuranPlayer";
+import RootLayoutClient from "@/components/RootLayoutClient";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -32,6 +29,7 @@ const ruqaa = Aref_Ruqaa({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dar-al-ihsan.vercel.app"),
   title: {
     default: "دار الإحسان لتحفيظ وتجويد القرآن الكريم - إدكو",
     template: "%s | دار الإحسان"
@@ -125,7 +123,7 @@ export default function RootLayout({
                   "Saturday",
                   "Sunday"
                 ],
-                "opens": "08:00",
+                "opens": "12:00",
                 "closes": "20:00"
               },
               "sameAs": [
@@ -149,19 +147,7 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeProvider attribute="class" defaultTheme="light">
             <TooltipProvider>
-              <div className="flex flex-col min-h-screen">
-                <Header />
-                <main className="flex-1">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-              <FloatingActionButton
-                type="whatsapp"
-                phoneNumber="+201159556715"
-                message="مرحباً، أود الاستفسار عن دار الإحسان لتحفيظ القرآن الكريم"
-              />
-              <QuranPlayer />
+              {children}
               <Toaster />
               <Sonner />
             </TooltipProvider>

@@ -32,7 +32,7 @@ const Graduates = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-12 bg-card border-y border-border">
+      <section className="py-12 bg-card border-y border-border"  dir="rtl">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {stats.map((stat, index) => (

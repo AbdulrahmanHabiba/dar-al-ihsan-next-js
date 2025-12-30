@@ -115,7 +115,7 @@ const HomePage = async () => {
                     className="object-contain drop-shadow-xl"
                   />
                 </div>
-                <p className="text-[10px] text-muted-foreground font-medium flex flex-col gap-3">
+                <p className="text-xs font-bold text-muted-foreground font-medium flex flex-col gap-3">
                   <span>ترخيص </span>
                   <span>رقم 828 </span>
                   <span>لسنة 2011 </span>

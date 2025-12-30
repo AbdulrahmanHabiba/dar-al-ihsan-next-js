@@ -78,6 +78,36 @@ enum GroupTime {
     Clock_06_00   // 06:00
 }
 
+// ========================================
+// Authentication & Authorization Enums
+// ========================================
+
+// أدوار المستخدمين
+enum Role {
+  SUPER_ADMIN  // 👑 صلاحيات كاملة
+  ADMIN        // 🔧 مشرف - يدير الطلاب والمعلمين
+  TEACHER      // 👨‍🏫 معلم - يدير طلابه ومجموعاته
+  STUDENT      // 👨‍🎓 طالب - قراءة فقط
+}
+
+// أيام الأسبوع (للمشرفين)
+enum DayOfWeek {
+  SATURDAY   // السبت
+  SUNDAY     // الأحد
+  MONDAY     // الاثنين
+  TUESDAY    // الثلاثاء
+  WEDNESDAY  // الأربعاء
+  THURSDAY   // الخميس
+  FRIDAY     // الجمعة
+}
+
+// مستوى الصلاحيات الإدارية (للمشرفين)
+enum AdminLevel {
+  SUPER_ADMIN  // 👑 صلاحيات كاملة (يتحكم في Supervisors)
+  ADMIN        // 🔧 مشرف عادي (لا يتحكم في Supervisors)
+  NONE         // بدون صلاحيات إدارية
+}
+
 // الطالب
 model Student {
   id          Int       @id @default(autoincrement())
@@ -95,6 +125,9 @@ model Student {
   groupId     Int?
   group       Group?    @relation(fields: [groupId], references: [id], onDelete: SetNull)
   
+  // ربط مع User (اختياري)
+  user        User?
+  
   createdAt   DateTime  @default(now())
   updatedAt   DateTime? @updatedAt
 }
@@ -109,6 +142,10 @@ model Teacher {
   email     String?
   groups    Group[]  // معلم واحد له مجموعات كتير (One-to-Many)
   students  Student[] // معلم واحد له طلاب كتير (One-to-Many)
+  
+  // ربط مع User (اختياري)
+  user      User?
+  
   createdAt DateTime  @default(now())
   updatedAt DateTime? @updatedAt
 }
@@ -151,4 +188,57 @@ model Complaint {
   message   String
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+// ========================================
+// Authentication & Authorization Models
+// ========================================
+
+// المستخدم (للمصادقة)
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique 
+  password      String    // Hashed with bcrypt
+  name          String?    
+  phone         String?   
+  email         String?   
+  role          Role      @default(STUDENT)
+  
+  // ربط اختياري مع Student/Teacher/Supervisor
+  studentId     Int?      @unique
+  student       Student?  @relation(fields: [studentId], references: [id], onDelete: SetNull)
+  
+  teacherId     Int?      @unique
+  teacher       Teacher?  @relation(fields: [teacherId], references: [id], onDelete: SetNull)
+  
+  supervisorId  Int?      @unique
+  supervisor    Supervisor? @relation(fields: [supervisorId], references: [id], onDelete: SetNull)
+  
+  // بيانات إضافية
+  isActive      Boolean   @default(true)
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// المشرف
+model Supervisor {
+  id             Int         @id @default(autoincrement())
+  name           String
+  phone          String?
+  email          String?
+  
+  // مستوى الصلاحيات الإدارية
+  adminLevel     AdminLevel  @default(ADMIN)
+  
+  // أيام وساعات التواجد
+  workDays       DayOfWeek[]
+  startTime      String?     // مثال: "09:00"
+  endTime        String?     // مثال: "17:00"
+  
+  // ربط مع User (اختياري)
+  user           User?
+  
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime?   @updatedAt
 }

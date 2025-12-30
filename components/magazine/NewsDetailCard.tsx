@@ -8,13 +8,14 @@ import { Calendar, Heart, User, Play, Clock } from "lucide-react";
 import Image from "next/image";
 import { useUpdateLikes } from "@/hooks/useNews";
 import type { News } from "@/types/news";
+import { getByVideoInfo } from "@/lib/video";
 
 interface NewsDetailCardProps {
   news: News;
 }
 
 export function NewsDetailCard({ news }: NewsDetailCardProps) {
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(news.videoUrl ? -1 : 0);
   const { mutate: likeNews, isPending } = useUpdateLikes(news.id);
 
   const handleLike = () => {
@@ -22,18 +23,34 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
   };
 
   return (
-    <Card className="flex flex-col h-full overflow-hidden shadow-elegant text-right border bg-card">
+    <Card className="flex flex-col h-full overflow-hidden shadow-elegant text-right border bg-card" dir="rtl">
       {/* Main Image/Video Section */}
       <div className="relative aspect-video bg-muted overflow-hidden group/media">
         {news.videoUrl && selectedImageIndex === -1 ? (
           <div className="relative w-full h-full bg-black">
-            <video
-              src={news.videoUrl}
-              controls
-              autoPlay
-              className="w-full h-full object-contain"
-              poster={news.images[0] || "/news-image.jpg"}
-            />
+            {(() => {
+              const videoInfo = getByVideoInfo(news.videoUrl);
+              if (videoInfo?.type === 'youtube') {
+                return (
+                  <iframe
+                    src={videoInfo.embedUrl}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={news.title}
+                  />
+                );
+              }
+              return (
+                <video
+                  src={news.videoUrl}
+                  controls
+                  autoPlay
+                  className="w-full h-full object-contain"
+                  poster={news.images[0] || "/news-image.jpg"}
+                />
+              );
+            })()}
           </div>
         ) : (
           <Image
@@ -64,6 +81,19 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
       {/* Gallery Thumbnails */}
       {(news.images.length > 1 || news.videoUrl) && (
         <div className="flex gap-3 p-4 overflow-x-auto bg-muted/50 scrollbar-hide border-y">
+          {/* Video Thumbnail */}
+          {news.videoUrl && (
+            <button
+              onClick={() => setSelectedImageIndex(-1)}
+              className={`relative flex-shrink-0 w-24 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 bg-black/80 flex items-center justify-center hover:scale-105 ${selectedImageIndex === -1
+                ? "border-primary shadow-md scale-105"
+                : "border-muted-foreground/20 opacity-60 hover:opacity-100"
+                }`}
+            >
+              <Play className="h-6 w-6 text-white" />
+            </button>
+          )}
+
           {news.images.map((image, index) => (
             <button
               key={index}
@@ -81,18 +111,6 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
               />
             </button>
           ))}
-          {/* Video Thumbnail */}
-          {news.videoUrl && (
-            <button
-              onClick={() => setSelectedImageIndex(-1)}
-              className={`relative flex-shrink-0 w-24 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 bg-black/80 flex items-center justify-center hover:scale-105 ${selectedImageIndex === -1
-                ? "border-primary shadow-md scale-105"
-                : "border-muted-foreground/20 opacity-60 hover:opacity-100"
-                }`}
-            >
-              <Play className="h-6 w-6 text-white" />
-            </button>
-          )}
         </div>
       )}
 
@@ -127,7 +145,7 @@ export function NewsDetailCard({ news }: NewsDetailCardProps) {
         {/* Description */}
         {news.description && (
           <div
-            className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-relaxed"
+            className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground leading-relaxed "
             dangerouslySetInnerHTML={{ __html: news.description }}
           />
         )}
