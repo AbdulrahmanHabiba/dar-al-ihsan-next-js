@@ -248,6 +248,19 @@ const SupervisorsPage = () => {
                                     dir="ltr"
                                 />
                             </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">الرتبة / الدور</label>
+                                <select
+                                    className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                    value={editingSup.role}
+                                    onChange={(e) => setEditingSup({ ...editingSup, role: e.target.value as Role })}
+                                >
+                                    <option value={Role.ADMIN}>مشرف</option>
+                                    <option value={Role.SUPER_ADMIN}>مدير نظام</option>
+                                    <option value={Role.TEACHER}>معلم</option>
+                                    <option value={Role.STUDENT}>طالب (عضو)</option>
+                                </select>
+                            </div>
                         </div>
                     )}
                     <DialogFooter>
@@ -257,7 +270,11 @@ const SupervisorsPage = () => {
                                 if (editingSup) {
                                     updateMutation.mutate({
                                         id: editingSup.id,
-                                        data: { name: editingSup.name, email: editingSup.email }
+                                        data: {
+                                            name: editingSup.name,
+                                            email: editingSup.email,
+                                            role: editingSup.role
+                                        }
                                     });
                                 }
                             }}

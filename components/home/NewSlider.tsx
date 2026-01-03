@@ -12,11 +12,11 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface NewSlider2Props {
+interface NewSliderProps {
     initialData: News[];
 }
 
-export default function NewSlider2({ initialData }: NewSlider2Props) {
+export default function NewSlider({ initialData }: NewSliderProps) {
     const { data: news = initialData, isLoading } = useNews(initialData);
     const [emblaRef, emblaApi] = useEmblaCarousel({
         align: "start",

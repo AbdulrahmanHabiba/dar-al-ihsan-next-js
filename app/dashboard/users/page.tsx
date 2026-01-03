@@ -203,24 +203,11 @@ const UserManagementPage = () => {
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
+                                <div className="space-y-2 col-span-2">
                                     <label className="text-sm font-medium text-right block">كلمة المرور</label>
                                     <Input name="password" type="password" required placeholder="••••••••" dir="ltr" />
                                 </div>
-                                <div className="space-y-2 col-span-2 sm:col-span-1">
-                                    <label className="text-sm font-medium text-right block">الوظيفة / الدور</label>
-                                    <select
-                                        name="role"
-                                        className="w-full h-10 px-3 rounded-md border border-input bg-background"
-                                        defaultValue={Role.STUDENT}
-                                        onChange={(e) => setSelectedRole(e.target.value as Role)}
-                                    >
-                                        <option value={Role.STUDENT}>طالب (عضو)</option>
-                                        <option value={Role.TEACHER}>معلم</option>
-                                        <option value={Role.ADMIN}>مشرف</option>
-                                        <option value={Role.SUPER_ADMIN}>مدير نظام</option>
-                                    </select>
-                                </div>
+                                <input type="hidden" name="role" value={Role.STUDENT} />
                             </div>
 
                             {/* Entity Linking */}
@@ -344,15 +331,6 @@ const UserManagementPage = () => {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                className="h-8 w-8 text-amber-600"
-                                                onClick={() => handlePromote(user)}
-                                                title="ترقية"
-                                            >
-                                                <ArrowUpCircle className="h-4 w-4" />
-                                            </Button>
-                                            <Button
-                                                variant="ghost"
-                                                size="icon"
                                                 className="h-8 w-8 text-destructive"
                                                 onClick={() => {
                                                     if (confirm("هل أنت متأكد من حذف هذا المستخدم نهائياً؟")) {
@@ -410,7 +388,7 @@ const UserManagementPage = () => {
 
             {/* View User Details Dialog */}
             <Dialog open={!!viewingUser} onOpenChange={(open) => !open && setViewingUser(null)}>
-                <DialogContent className="max-w-md">
+                <DialogContent className="max-w-md h-full overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle className="flex items-center gap-2">
                             <UserIcon className="h-5 w-5 text-primary" />

@@ -101,8 +101,8 @@ const Header = () => {
 
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3">
-          <div className="flex md:h-12 md:w-12 sm:h-10 sm:w-10 h-8 w-8 items-center justify-center rounded-full bg-gradient-primary shadow-elegant">
-            <BookOpen className="md:h-7 md:w-7 sm:h-6 sm:w-6 h-5 w-5  text-primary-foreground" />
+          <div className="flex md:h-12 md:w-12 h-10 w-10 items-center justify-center rounded-full bg-gradient-primary shadow-elegant">
+            <BookOpen className="md:h-7 md:w-7 h-6 w-6  text-primary-foreground" />
           </div>
           <div className="hidden md:block text-right">
             <h1 className="text-xl font-bold leading-tight">دار الإحسان</h1>
@@ -147,13 +147,13 @@ const Header = () => {
           {isLoggedIn && (
             <NavLink
               to="/profile"
-              className="flex items-center gap-2 px-2 py-1 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors border border-primary/20"
-              activeClassName="bg-primary/20 border-primary"
+              className="flex items-center gap-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors border border-primary/20"
+              activeClassName="bg-primary/20"
             >
               <div className="h-8 w-8 rounded-full bg-gradient-primary flex items-center justify-center text-white shadow-sm">
                 <UserIcon className="h-4 w-4" />
               </div>
-              <span className="hidden sm:block text-xs font-bold pl-1">{user?.name?.split(' ')[0] || user?.username}</span>
+              {/* <span className="hidden sm:block text-xs font-bold pl-1">{user?.name?.split(' ')[0] || user?.username}</span> */}
             </NavLink>
           )}
         </div>

@@ -1,5 +1,5 @@
 
-import NewSlider2 from "@/components/home/NewSlider2";
+import NewSlider2 from "@/components/home/NewSlider";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, Users, Award, GraduationCap, Star } from "lucide-react";

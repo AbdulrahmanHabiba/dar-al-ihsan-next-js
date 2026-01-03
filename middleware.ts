@@ -39,7 +39,28 @@ export async function middleware(req: NextRequest) {
     return handleUnauthorized(req, isApiProtectedPath);
   }
 
-  // 4. السماح بمرور الطلب
+  const userRole = payload.role as string;
+
+  // 4. فحص الصلاحيات بناءً على الرتبة
+  
+  // أ. الطالب ممنوع من دخول الداشبورد نهائياً
+  if (userRole === "STUDENT" && pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+
+  // ب. المشرف (ADMIN) ممنوع من دخول صفحة إدارة المشرفين
+  if (userRole === "ADMIN" && pathname.startsWith("/dashboard/supervisors")) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/dashboard";
+    return NextResponse.redirect(url);
+  }
+
+  // ج. المعلم (TEACHER) نمنعه من الـ API الحساسة لو مش في مسار المعلمين
+  if (userRole === "TEACHER" && isApiProtectedPath && !pathname.startsWith("/api/teachers")) {
+    return NextResponse.json({ error: "غير مصرح لك" }, { status: 403 });
+  }
+
+  // 5. السماح بمرور الطلب
   return NextResponse.next();
 }
 
