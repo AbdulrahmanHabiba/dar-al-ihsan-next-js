@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Role } from "@/hooks/useAuth";
+import { Role, useMe } from "@/hooks/useAuth";
 
 interface UserInfo {
     id: number;
@@ -419,7 +419,7 @@ const UserManagementPage = () => {
                                     {editingUser.role === Role.STUDENT && (
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium">ربط بطالب موجود</label>
-                                            <select 
+                                            <select
                                                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                                                 value={editingUser.studentId || ""}
                                                 onChange={(e) => setEditingUser({ ...editingUser, studentId: e.target.value ? Number(e.target.value) : null })}
@@ -433,7 +433,7 @@ const UserManagementPage = () => {
                                     {editingUser.role === Role.TEACHER && (
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium">ربط بمعلم موجود</label>
-                                            <select 
+                                            <select
                                                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                                                 value={editingUser.teacherId || ""}
                                                 onChange={(e) => setEditingUser({ ...editingUser, teacherId: e.target.value ? Number(e.target.value) : null })}
@@ -447,7 +447,7 @@ const UserManagementPage = () => {
                                     {(editingUser.role === Role.ADMIN || editingUser.role === Role.SUPER_ADMIN) && (
                                         <div className="space-y-2">
                                             <label className="text-sm font-medium">ربط بمشرف موجود</label>
-                                            <select 
+                                            <select
                                                 className="w-full h-10 px-3 rounded-md border border-input bg-background"
                                                 value={editingUser.supervisorId || ""}
                                                 onChange={(e) => setEditingUser({ ...editingUser, supervisorId: e.target.value ? Number(e.target.value) : null })}
