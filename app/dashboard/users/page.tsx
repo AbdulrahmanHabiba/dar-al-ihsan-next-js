@@ -53,6 +53,7 @@ interface UserInfo {
 
 const UserManagementPage = () => {
     const queryClient = useQueryClient();
+    const { isSuperAdmin } = useMe();
     const [editingUser, setEditingUser] = useState<UserInfo | null>(null);
     const [viewingUser, setViewingUser] = useState<UserInfo | null>(null);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
@@ -132,7 +133,8 @@ const UserManagementPage = () => {
 
     const handlePromote = (user: UserInfo) => {
         let nextRole = user.role;
-        if (user.role === Role.STUDENT) nextRole = Role.ADMIN;
+        if (user.role === Role.STUDENT) nextRole = Role.TEACHER;
+        else if (user.role === Role.TEACHER) nextRole = Role.ADMIN;
         else if (user.role === Role.ADMIN) nextRole = Role.SUPER_ADMIN;
         else {
             toast.info("المستخدم لديه أعلى صلاحيات بالفعل");
@@ -203,11 +205,24 @@ const UserManagementPage = () => {
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-2 col-span-2">
+                                <div className="space-y-2 col-span-2 sm:col-span-1">
                                     <label className="text-sm font-medium text-right block">كلمة المرور</label>
                                     <Input name="password" type="password" required placeholder="••••••••" dir="ltr" />
                                 </div>
-                                <input type="hidden" name="role" value={Role.STUDENT} />
+                                <div className="space-y-2 col-span-2 sm:col-span-1">
+                                    <label className="text-sm font-medium text-right block">الوظيفة / الدور</label>
+                                    <select
+                                        name="role"
+                                        className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                        defaultValue={selectedRole}
+                                        onChange={(e) => setSelectedRole(e.target.value as Role)}
+                                    >
+                                        <option value={Role.STUDENT}>طالب (عضو)</option>
+                                        <option value={Role.TEACHER}>معلم</option>
+                                        <option value={Role.ADMIN}>مشرف</option>
+                                        <option value={Role.SUPER_ADMIN}>مدير نظام</option>
+                                    </select>
+                                </div>
                             </div>
 
                             {/* Entity Linking */}
@@ -316,6 +331,20 @@ const UserManagementPage = () => {
                                             >
                                                 <Eye className="h-4 w-4" />
                                             </Button>
+
+                                            {/* زر الترقية متاح فقط للسوبر أدمن */}
+                                            {isSuperAdmin && (
+                                                <Button
+                                                    variant="ghost"
+                                                    size="icon"
+                                                    className="h-8 w-8 text-amber-600"
+                                                    onClick={() => handlePromote(user)}
+                                                    title="ترقية الرتبة"
+                                                >
+                                                    <ArrowUpCircle className="h-4 w-4" />
+                                                </Button>
+                                            )}
+
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
@@ -360,7 +389,7 @@ const UserManagementPage = () => {
                         </DialogDescription>
                     </DialogHeader>
                     {editingUser && (
-                        <div className="space-y-4 py-4">
+                        <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto px-1">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">الاسم الكامل</label>
                                 <Input
@@ -368,6 +397,68 @@ const UserManagementPage = () => {
                                     onChange={(e) => setEditingUser({ ...editingUser, name: e.target.value })}
                                 />
                             </div>
+
+                            {/* خيارات متقدمة للسوبر أدمن فقط */}
+                            {isSuperAdmin && (
+                                <>
+                                    <div className="space-y-2 pt-2 border-t">
+                                        <label className="text-sm font-bold text-destructive">تعديل الرتبة (مدير نظام فقط)</label>
+                                        <select
+                                            className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                            value={editingUser.role}
+                                            onChange={(e) => setEditingUser({ ...editingUser, role: e.target.value as Role })}
+                                        >
+                                            <option value={Role.STUDENT}>طالب (عضو)</option>
+                                            <option value={Role.TEACHER}>معلم</option>
+                                            <option value={Role.ADMIN}>مشرف</option>
+                                            <option value={Role.SUPER_ADMIN}>مدير نظام</option>
+                                        </select>
+                                    </div>
+
+                                    {/* Entity Linking in Edit Mode */}
+                                    {editingUser.role === Role.STUDENT && (
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium">ربط بطالب موجود</label>
+                                            <select 
+                                                className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                                value={editingUser.studentId || ""}
+                                                onChange={(e) => setEditingUser({ ...editingUser, studentId: e.target.value ? Number(e.target.value) : null })}
+                                            >
+                                                <option value="">-- بلا ربط --</option>
+                                                {students.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
+                                            </select>
+                                        </div>
+                                    )}
+
+                                    {editingUser.role === Role.TEACHER && (
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium">ربط بمعلم موجود</label>
+                                            <select 
+                                                className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                                value={editingUser.teacherId || ""}
+                                                onChange={(e) => setEditingUser({ ...editingUser, teacherId: e.target.value ? Number(e.target.value) : null })}
+                                            >
+                                                <option value="">-- بلا ربط --</option>
+                                                {teachers.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
+                                            </select>
+                                        </div>
+                                    )}
+
+                                    {(editingUser.role === Role.ADMIN || editingUser.role === Role.SUPER_ADMIN) && (
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-medium">ربط بمشرف موجود</label>
+                                            <select 
+                                                className="w-full h-10 px-3 rounded-md border border-input bg-background"
+                                                value={editingUser.supervisorId || ""}
+                                                onChange={(e) => setEditingUser({ ...editingUser, supervisorId: e.target.value ? Number(e.target.value) : null })}
+                                            >
+                                                <option value="">-- بلا ربط --</option>
+                                                {supervisors.map(s => <option key={s.id} value={s.id}>{s.name || s.username}</option>)}
+                                            </select>
+                                        </div>
+                                    )}
+                                </>
+                            )}
                         </div>
                     )}
                     <DialogFooter>
@@ -375,7 +466,14 @@ const UserManagementPage = () => {
                         <Button
                             onClick={() => {
                                 if (editingUser) {
-                                    updateMutation.mutate({ id: editingUser.id, data: { name: editingUser.name } });
+                                    const updateData: any = { name: editingUser.name };
+                                    if (isSuperAdmin) {
+                                        updateData.role = editingUser.role;
+                                        updateData.studentId = editingUser.studentId;
+                                        updateData.teacherId = editingUser.teacherId;
+                                        updateData.supervisorId = editingUser.supervisorId;
+                                    }
+                                    updateMutation.mutate({ id: editingUser.id, data: updateData });
                                 }
                             }}
                             disabled={updateMutation.isPending}
