@@ -121,7 +121,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   const filteredNavItems = navItems.filter(item => {
     if (isSuperAdmin) return true;
     if (isAdmin) return item.href !== "/dashboard/supervisors";
-    if (isTeacher) return item.href === "/dashboard" || item.href === "/dashboard/teachers";
+    if (isTeacher) return item.href === "/dashboard" || item.href === "/dashboard/teachers" || item.href === "/dashboard/students";
     return false;
   });
 

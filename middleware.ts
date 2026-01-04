@@ -56,7 +56,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // ج. المعلم (TEACHER) نمنعه من الـ API الحساسة لو مش في مسار المعلمين
-  if (userRole === "TEACHER" && isApiProtectedPath && !pathname.startsWith("/api/teachers")) {
+  if (userRole === "TEACHER" && isApiProtectedPath && !pathname.startsWith("/api/teachers") && !pathname.startsWith("/api/students")) {
     return NextResponse.json({ error: "غير مصرح لك" }, { status: 403 });
   }
 
